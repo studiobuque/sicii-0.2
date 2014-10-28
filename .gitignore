@@ -1,3 +1,11 @@
-/bootstrap/compiled.php
+/bootstrap
+/vendor
+
+composer.phar
+composer.lock
+
+.git*
 .env.*.php
 .env.php
+.DS_Store
+Thumbs.db
