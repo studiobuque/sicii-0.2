@@ -21,7 +21,7 @@ class CreateSubjectsTable extends Migration {
 			$table->string('parent');
 			$table->tinyInteger('level');
 			$table->string('degree');
-			$table->string('lapse');
+			$table->integer('lapse');
 			
 			$table->timestamps();
 		});

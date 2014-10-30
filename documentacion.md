@@ -40,11 +40,22 @@ php artisan generate:model Profile
 php artisan generate:model Subject
 php artisan generate:model Rating
  ```
+ 
+ ** Creamos las tablas con datos, para eso estan los Seeds, tambien utilizamos los generadores
+ ```
+php artisan generate:seed subjects
+php artisan generate:seed profiles
+php artisan generate:seed ratings
+ ```
 	
 ** Generar usuarios ficticios
-Instalamos el [paquete Faker](https://github.com/fzaninotto/Faker)
-	
 Los Seeds nos ayudan a crear los datos, otra vez usamos los generadores
+Instalamos el [Faker con el manual de github](https://github.com/fzaninotto/Faker), [paquete Faker](https://packagist.org/packages/fzaninotto/faker). Luego corremos la actualizacion de laravel en la consola
+ ```
+composer update --dev
+ ```
+
+Construimos los seeders, y ejecutando en la terminal para llenar la tabla
  ```
 php artisan db:seed
  ```

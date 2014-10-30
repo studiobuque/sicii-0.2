@@ -17,9 +17,9 @@ class CreateRatingsTable extends Migration {
 			$table->increments('id');
 			
 			// Perfil vinculado
-			$table->integer('profile_id')->unsigned()->foreign('user_id')->references('id')->on('profiles');
+			$table->integer('profile_id')->unsigned()->foreign('profile_id')->references('id')->on('profiles');
 			// Materia vinculada
-			$table->integer('subject_id')->unsigned()->foreign('user_id')->references('id')->on('subjects');
+			$table->integer('subject_id')->unsigned()->foreign('subject_id')->references('id')->on('subjects');
 			
 			$table->decimal('rating', 2, 2);
 			$table->integer('parcial');
