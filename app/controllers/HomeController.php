@@ -15,9 +15,12 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
+	public function index()
 	{
-		return View::make('hello');
+		// return View::make('desktop');
+		
+		$profiles = Profile::all();
+		return View::make('desktop')->with('profiles', $profiles);
 	}
 
 }
