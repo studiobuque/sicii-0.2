@@ -31,17 +31,14 @@ toca contruir las tablas en base a las migraciones son el schema. Al terminar ej
  ```
 php artisan migrate
  ```
-
-** Crear los campos con el Schema
-
 	
 ** El ORM de laravel relaciona las tablas como objetos, nos da que la Tabla = Clase y la Fila = Objeto
 
 Creamos los modelos con los generadores
  ```
-		php artisan generate:model Profile
-		php artisan generate:model Subject
-		php artisan generate:model Rating
+php artisan generate:model Profile
+php artisan generate:model Subject
+php artisan generate:model Rating
  ```
 	
 ** Generar usuarios ficticios
