@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Factory as Faker;
+use Sicii\Entities\Rating;
 
 class RatingsTableSeeder extends Seeder {
 
@@ -18,21 +19,22 @@ class RatingsTableSeeder extends Seeder {
 		
 		$faker = Faker::create('es_ES');
 		
-		$subjects = array('Arquitectura', 'Derecho', 'Idiomas');
+		$subjects = array('arquitectura', 'derecho', 'idiomas');
 		$count = 0;
 		
 		foreach(range(1, 20) as $profile) {
 			foreach(range(1, 3) as $degree) {
-				foreach(range(1, 4) as $lapse) {
+				// foreach(range(1, 4) as $lapse) {
 					$count++;
 					Rating::create([
 						'profile_id' 	=> $profile,
 						// 'subject_id' 	=> $count,
-						'subject_id' 	=> $degree*$lapse,
+						// 'subject_id' 	=> $degree*$lapse,
+						'subject_id' 	=> $degree,
 						'rating' 		=> $faker->randomFloat($nbMaxDecimals = 2, $min = 7, $max = 10),
 						'parcial' 	=> '1'
 					]);
-				}
+				// }
 			}
 		}
 		

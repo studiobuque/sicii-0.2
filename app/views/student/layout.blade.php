@@ -27,14 +27,14 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="{{ route('home') }}">Escritorio</a></li>
-					<!-- <li><a href="#">Opciones</a></li> -->
-					<li><a href="#">Perfil</a></li>
-					<li><a href="#">Ayuda</a></li>
+					<li><a href="{{ route('student') }}"><span class="glyphicon glyphicon-dashboard"></span> Escritorio</a></li>
+					<li><a href="{{ route('student') }}"><span class="glyphicon glyphicon-user"></span> Perfil</a></li>
+					<li><a href="{{ route('student') }}"><span class="glyphicon glyphicon-cog"></span> Opciones</a></li>
+					<li><a href="{{ route('student') }}"><span class="glyphicon glyphicon-exclamation-sign"></span> Ayuda</a></li>
 				</ul>
-				<form class="navbar-form navbar-right">
+				<!-- <form class="navbar-form navbar-right">
 					<input type="text" class="form-control" placeholder="Search...">
-				</form>
+				</form> -->
 			</div>
 		</div>
 	</div>
@@ -48,13 +48,13 @@
 					<li><a href="">Inicio</a></li><!- -  class="active" - ->
 					<li><a href="#">Perfil</a></li>
 				</ul>
-				<hr>
-				<ul class="nav nav-sidebar">
+				<hr> -->
+				<ul class="nav nav-sidebar navbar-collapse collapse">
 					<li><a href="{{ route('student') }}">Alumno</a></li>
 					<li><a href="{{ route('student-rating') }}">Calificacion</a></li>
 					<li><a href="{{ route('student-pay') }}">Pagos</a></li>
 					<li><a href="{{ route('student-education') }}">Educación Virtual</a></li>
-				</ul> -->
+				</ul>
 			</div>
 			
 			<!-- Contenido -->
