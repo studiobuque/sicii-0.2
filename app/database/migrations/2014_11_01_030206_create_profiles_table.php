@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateProfilesTable extends Migration {
 
@@ -12,23 +12,21 @@ class CreateProfilesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('profiles', function(Blueprint $table)
-		{
+		Schema::create('profiles', function(Blueprint $table) {
 			$table->increments('id');
 			// Usuario vinculado
 			$table->integer('user_id')->unsigned()->foreign('user_id')->references('id')->on('users');
-			// Carrera designada, por la materia en nivel 1
-			$table->integer('subjects_id')->unsigned()->foreign('subjects_id')->references('id')->on('subjects');
-			
 			// Todos los datos necesarios para la UCIL
+			$table->string('first_name');
+			$table->string('last_name');
 			$table->string('address');
 			$table->string('phone');
 			$table->string('movile');
 			
-			
 			$table->timestamps();
 		});
 	}
+
 
 	/**
 	 * Reverse the migrations.
@@ -37,7 +35,7 @@ class CreateProfilesTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('profiles');
 	}
 
 }

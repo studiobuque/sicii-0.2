@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateSubjectsTable extends Migration {
 
@@ -12,20 +12,21 @@ class CreateSubjectsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('subjects', function(Blueprint $table)
-		{
+		Schema::create('subjects', function(Blueprint $table) {
 			$table->increments('id');
 			
 			$table->string('name');
 			$table->string('description');
 			$table->string('parent');
 			$table->tinyInteger('level');
-			$table->string('degree');
+			$table->integer('degree_id')->unsigned()->foreign('degree_id')->references('id')->on('degrees');
 			$table->integer('lapse');
+			
 			
 			$table->timestamps();
 		});
 	}
+
 
 	/**
 	 * Reverse the migrations.
@@ -34,7 +35,7 @@ class CreateSubjectsTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('subjects');
 	}
 
 }
