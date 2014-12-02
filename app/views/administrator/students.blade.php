@@ -1,4 +1,4 @@
-@extends ('administrator/layout')
+@extends ('layout')
 
 @section ('title') Escritorio ::  @stop
 
@@ -25,13 +25,13 @@
 								{{ $student->user->control }}
 							</td>
 							<td class="text-capitalize">
-								{{ $student->first_name }} {{ $student->last_name }}
+								{{ $student->first_name }} {{ $student->father_last_name }} {{ $student->mother_last_name }}
 							</td>
 							<td class="text-capitalize">
 								{{ $student->phone }}
 							</td>
 							<td class="">
-								<a href="{{ route('administrator-student', [$student->first_name, $student->id]) }}" class="btn btn-info hidden-print">Ver</a>
+								<a href="{{ route('administrator-student', array($student->first_name, $student->id)) }}" class="btn btn-info hidden-print">Ver</a>
 							</td>
 						</tr>
 						@endforeach

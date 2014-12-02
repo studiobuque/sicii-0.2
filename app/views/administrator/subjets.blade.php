@@ -1,4 +1,4 @@
-@extends ('administrator/layout')
+@extends ('layout')
 
 @section ('title') Materias ::  @stop
 
@@ -38,7 +38,7 @@
 								{{ @$subject->lapse }}
 							</td>
 							<td>
-								<a href="{{ route('administrator-subject', [$subject->lapse, $subject->id]) }}" class="btn btn-info">Ver</a>
+								<a href="{{ route('administrator_subject', array('materia' => $subject->lapse, 'id' => $subject->id)) }}" class="btn btn-info">Ver</a>
 							</td>
 						</tr>
 						@endforeach

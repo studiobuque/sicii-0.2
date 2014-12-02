@@ -4,7 +4,6 @@
 
 @section ('content')
 
-					BECIHE1971
 				<h1>Configuraciones</h1>
 				<li>Control de págos</li>
 					<ul>
@@ -20,6 +19,7 @@
 						<hr>
 						<li></li>
 					</ul>
+					BECIHE1971
 				<li>Historial de págos</li>
 				<li>Configuración
 					<ul>
@@ -29,14 +29,14 @@
 						<li>Configuración del servidor</li>
 					</ul>
 				</li>
-
+				
 				<h2>Control Escolar</h2>
 				<li>Ver un alumno</li>
 				<li>Reporte de las calificaciones</li>
 				<li>buscar un alumno</li>
 				
-
+				
 				<h2>Soporte Tecnico</h2>
-
+				
 				<li>Formulaio de contacto</li>
 @stop

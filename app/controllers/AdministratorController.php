@@ -3,6 +3,11 @@
 
 class AdministratorController extends \BaseController {
 	
+	public function desktop()
+	{
+		return View::make('administrator/desktop');
+	}
+	
 	// Listar las Materias
 	public function listSubject()
 	{
@@ -38,7 +43,37 @@ class AdministratorController extends \BaseController {
 		
 		return View::make('administrator/student')->with('student', $student);
 	}
-
+	
+	// Ver las cuentas de los usuarios administradores.
+	public function user()
+	{
+		
+		return View::make('administrator/userNew');
+	}
+	
+	// Ver las cuentas de los usuarios administradores.
+	public function userNew()
+	{
+		// $student = Profile::find($id);
+		$data = Input::all();
+		
+		$rules = array(
+			'first_name' => 'required',
+			'control' => 'required',
+			'email' => 'required',
+			'password' => 'required'
+		);
+		
+		$validator = Validator::make($data, $rules);
+		// dd($validator);
+		return Response::json($validator->messages());
+		
+		// return View::make('administrator/userNew');
+	}
+	public function adminConfig()
+	{
+		return View::make('administrator/config');
+	}
 
 	/**
 	 * Show the form for creating a new resource.
