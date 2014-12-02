@@ -1,4 +1,4 @@
-@extends ('student/layout')
+@extends ('layout')
 
 @section ('title')Mis Calificaciónes ::  @stop
 
@@ -6,7 +6,7 @@
 
 				<h1 class="page-header">Educación Virtual</h1>
 				
-				<p class="lead">Aqui puede interactuar para el mejor aprobechaminto de las clases</p>
+				<!-- <p class="lead">Aquí puede interactuar para el mejor aprovechaminto de las clases</p> -->
 				
 				<h2>{{ $student->first_name }}</h2>
 				
@@ -30,9 +30,9 @@
 	@endforeach
 					</tbody>
 				</table>
-				
+				<!-- 
 				<div class="col-lg-6">
-					<h3>Acesor Academico</h3>
+					<h3>Asesor Académico</h3>
 					<ul>
 						<li>Ver</li>
 						<li>Preguntar</li>
@@ -44,6 +44,6 @@
 						<li>Ver</li>
 						<li>Preguntar</li>
 					</ul>
-				</div>
+				</div> -->
 				
 @stop

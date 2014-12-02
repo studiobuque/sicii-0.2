@@ -1,4 +1,4 @@
-@extends ('student/layout')
+@extends ('layout')
 
 @section ('title')Mis Calificaciónes ::  @stop
 

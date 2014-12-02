@@ -54,10 +54,14 @@
 					<li><a href="{{ route('student-rating') }}">Calificacion</a></li>
 					<li><a href="{{ route('student-pay') }}">Pagos</a></li>
 					<li><a href="{{ route('student-education') }}">Educación Virtual</a></li>
+					<li><a href="{{ route('student') }}">Asesor Academico</a></li>
+					<li><a href="{{ route('student') }}">Comunidad de la educación</a></li>
 				</ul>
 			</div>
 			
 			<!-- Contenido -->
+			
+			{{ Route::currentRouteName() }}
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				@yield('content')
 			</div>

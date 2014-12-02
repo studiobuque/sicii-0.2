@@ -20,4 +20,14 @@ class Subject extends Eloquent {
 	{
 		return $this->belongsTo('Degree');
 	}
+	
+	public function subjectsLapse($lapse)
+	{
+		return $this->where('lapse', '==', $lapse);
+	}
+	
+	public function materias($degree)
+	{
+		return $this->has('degree_id', '==', $degree);
+	}
 }

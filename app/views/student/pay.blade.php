@@ -1,10 +1,10 @@
-@extends ('student/layout')
+@extends ('layout')
 
-@section ('title')Mis Calificaciónes ::  @stop
+@section ('title') Pagos ::  @stop
 
 @section ('content')
 
-				<h1 class="page-header">Mareria</h1>
+				<h1 class="page-header">Materia</h1>
 				
 				<p class="lead">Mostrar los datos de la materia</p>
 				

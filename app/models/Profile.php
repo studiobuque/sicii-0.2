@@ -12,4 +12,14 @@ class Profile extends \Eloquent {
 	{
 		return $this->hasOne('User', 'id', 'user_id');
 	}
+	
+	public function degree()
+	{
+		return $this->belongsTo('Degree');
+	}
+	
+	public function rating()
+	{
+		return $this->hasMany('Rating');
+	}
 }

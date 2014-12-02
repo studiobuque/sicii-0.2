@@ -11,18 +11,25 @@ Para esto necesitamos leer, la siguiente documentación: [Configurar la base de 
 
 ### Usar los generadores
 
-**Para usar los generadores facilitandonos la vida creando las tablas y modelos
+Para usar los generadores facilitandonos la vida creando las tablas y modelos
 
 Podemos crear modelos, vistas, migraciones con los [Generadores de JeffreyWay](https://github.com/JeffreyWay/Laravel-4-Generators)
 
-*** 2.- Creamos las migraciones para las tablas**
+**2.- Creamos las migraciones para las tablas**
 
  ```
 php artisan generate:migration create_users_table
-php artisan generate:migration create_subjects_table
-php artisan generate:migration create_profiles_table
-php artisan generate:migration create_ratings_table
  ```
+
+En este caso por utilizar laravel 4.1 usaremos las migraciones de laravel
+
+```
+php artisan migrate:make create_users_table
+php artisan migrate:make create_subjects_table
+php artisan migrate:make create_degrees_table
+php artisan migrate:make create_profiles_table
+php artisan migrate:make create_ratings_table
+```
 
 ** 3.- Construir las tablas con e [Schema Builder de Laravel](http://laravel.com/docs/4.2/schema)**
 
@@ -37,15 +44,16 @@ php artisan migrate
 Creamos los modelos con los generadores
  ```
 php artisan generate:model Profile
+php artisan generate:model Degree
 php artisan generate:model Subject
-php artisan generate:model Rating
+
  ```
  
  ** Creamos las tablas con datos, para eso estan los Seeds, tambien utilizamos los generadores**
  ```
 php artisan generate:seed subjects
+php artisan generate:seed Degree
 php artisan generate:seed profiles
-php artisan generate:seed ratings
  ```
 	
 ** Generar usuarios ficticios**
