@@ -78,3 +78,69 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| Filtrar por tipo de usuario
+|--------------------------------------------------------------------------
+*/
+
+Route::filter('student', function()
+{
+	if (Auth::check()) {
+		if (  Auth::user()->type != 'student'){
+			return View::make('error404');//->with('err', $err)
+			// Pasa
+		} else {
+			// return Redirect::route('student');
+			
+		}
+	} else {
+		return Redirect::route('login');
+	}
+});
+
+Route::filter('teacher', function()
+{
+	if (Auth::check()) {
+		if (  Auth::user()->type != 'teacher'){
+			return View::make('error404');//->with('err', $err)
+			// return Auth::check() && Auth::user()->type == 'student';
+		} else {
+			// return Redirect::route('teacher');
+			
+		}
+	} else {
+		return Redirect::route('login');
+	}
+});
+
+Route::filter('admin', function()
+{
+	if (Auth::check()) {
+		if (  Auth::user()->type != 'admin'){
+			return View::make('error404'); //->with('err', $err)
+			// return Auth::check() && Auth::user()->type == 'admin';
+		} else {
+			// return Redirect::route('admin');
+			
+		}
+	} else {
+		return Redirect::route('login');
+	}
+});
+function is_student()
+{
+	return Auth::user()->type == 'student';
+}
+
+function is_teacher()
+{
+	return Auth::user()->type == 'teacher';
+}
+
+function is_admin()
+{
+	return Auth::user()->type == 'admin';
+}

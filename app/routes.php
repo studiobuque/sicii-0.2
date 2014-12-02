@@ -11,22 +11,70 @@
 |
 */
 
-Route::get('/', array('as' => 'home', 'uses' => 'HomeController@index'));
+// Ruta de usuario no conectados
+Route::get('/', 		array('as' => 'home', 'uses' => 'HomeController@index'));
+	
+Route::group(array('before' => 'guest'), function() {
+	Route::post('login', 	array('as' => 'login', 'uses' => 'HomeController@login'));
+	Route::get('login', 	array('as' => 'login_users', 'uses' => 'HomeController@index'));
+});
 
-Route::get('administrador', 				array('as' => 'administrator', 'uses' => 'AdministratorController@listSubject'));
-Route::get('administrador/materias', 			array('as' => 'administrator-subjects', 'uses' => 'AdministratorController@listSubject'));
-Route::get('administrador/materia/{subject}/{id}', 	array('as' => 'administrator-subject', 'uses' => 'AdministratorController@viewSubject'));
-Route::get('administrador/alumnos', 			array('as' => 'administrator-students', 'uses' => 'AdministratorController@listStudent'));
-Route::get('administrador/alumno/{student}/{id}', 	array('as' => 'administrator-student', 'uses' => 'AdministratorController@viewStudent'));
+// Rutas de los alumnos
+Route::group(array('before' => 'student'), function () {
+	Route::get('/', 				array('as' => 'desktop', 'uses' => 'StudentController@desktop'));
+	Route::get('alumno', 			array('as' => 'student', 'uses' => 'StudentController@desktop'));
+	Route::get('alumno/calificaciones', 	array('as' => 'student-rating', 'uses' => 'StudentController@rating'));
+	Route::get('alumno/materia', 		array('as' => 'student-subject', 'uses' => 'StudentController@subject'));
+	Route::get('alumno/pagos', 		array('as' => 'student-pay', 'uses' => 'StudentController@pay'));
+	Route::get('alumno/realizar-pago', 	array('as' => 'student-payment', 'uses' => 'StudentController@desktop'));
+	Route::get('alumno/educacion', 	array('as' => 'student-education', 'uses' => 'StudentController@education'));
+	Route::get('alumno/clase', 		array('as' => 'student-clasroom', 'uses' => 'StudentController@desktop'));
+	Route::get('alumno/foro', 		array('as' => 'student-ask', 'uses' => 'StudentController@desktop'));
+	Route::get('alumno/comunidad', 	array('as' => 'student_ask_comunity', 'uses' => 'StudentController@comunity'));
+	Route::get('alumno/crear-post', 	
+						array('as' => 'student_create_post_comunity', 'uses' => 'StudentController@comunityCreatePost'));
+	Route::get('alumno/asesor', 		array('as' => 'student_ask_partner', 'uses' => 'StudentController@desktop'));
+});
 
-Route::get('alumno', 			array('as' => 'student', 'uses' => 'StudentController@desktop'));
-Route::get('alumno/calificaciones', 	array('as' => 'student-rating', 'uses' => 'StudentController@rating'));
-Route::get('alumno/materia', 		array('as' => 'student-subject', 'uses' => 'StudentController@subject'));
-Route::get('alumno/pagos', 		array('as' => 'student-pay', 'uses' => 'StudentController@pay'));
-Route::get('alumno/realizar-pago/', 	array('as' => 'student-payment', 'uses' => 'StudentController@desktop'));
-Route::get('alumno/educacion', 	array('as' => 'student-education', 'uses' => 'StudentController@education'));
-Route::get('alumno/clase', 		array('as' => 'student-clasroom', 'uses' => 'StudentController@desktop'));
-Route::get('alumno/foro', 		array('as' => 'student-ask', 'uses' => 'StudentController@desktop'));
-Route::get('alumno/cominidad', 	array('as' => 'student-ask-comunity', 'uses' => 'StudentController@desktop'));
-Route::get('alumno/asesor', 		array('as' => 'student-ask-partner', 'uses' => 'StudentController@desktop'));
+		
+// Rutas de los maestros
+Route::group(array('before' => 'teacher'), function () {
+	Route::get('/', 				array('as' => 'desktop', 'uses' => 'TeacherController@desktop'));
+	Route::get('maestro', 			array('as' => 'teacher', 'uses' => 'TeacherController@desktop'));
+	Route::get('maestro/calificacion', 	array('as' => 'teacher-ratings', 'uses' => 'TeacherController@ratings'));
+	Route::get('maestro/educacion', 	array('as' => 'teacher-education', 'uses' => 'TeacherController@education'));
+	Route::get('maestro/asesor', 		array('as' => 'teacher-advisor', 'uses' => 'TeacherController@advisor'));
+});
 
+// Rutas para los administradores
+Route::group(array('before' => 'admin'), function () {
+	Route::get('/', 				array('as' => 'desktop', 'uses' => 'AdministratorController@desktop'));
+	Route::get('admin', 			array('as' => 'administrator', 'uses' => 'AdministratorController@desktop'));
+	Route::get('admin/materias', 		array('as' => 'administrator_subjects', 'uses' => 'AdministratorController@listSubject'));
+	Route::get('admin/materia/{subject}/{id}', 	
+						array('as' => 'administrator_subject', 'uses' => 'AdministratorController@viewSubject'));
+	Route::get('admin/alumnos', 		array('as' => 'administrator_students', 'uses' => 'AdministratorController@listStudent'));
+	Route::get('admin/ver-alumno/{student}/{id}', 	
+						array('as' => 'administrator_student', 'uses' => 'AdministratorController@viewStudent'));
+	Route::get('admin/cuenta', 		array('as' => 'administrator_user', 'uses' => 'AdministratorController@user'));
+	Route::post('admin/cuenta', 		array('as' => 'administrator_user_new', 'uses' => 'AdministratorController@userNew'));
+	// Route::get('admin/cuenta-nueva', 	array('as' => 'administrator_user_new', 'uses' => 'AdministratorController@userNew'));
+	Route::get('admin-configuracion', 			array('as' => 'administrator_config', 'uses' => 'AdministratorController@adminConfig'));
+});
+	
+Route::group(array('before' => 'auth'), function() {
+	
+	Route::get('perfil', 	array('as' => 'profile', 'uses' => 'HomeController@profile'));
+	Route::post('perfil', 	array('as' => 'profile_save', 'uses' => 'HomeController@profileSave'));
+	
+	// Ruta pasa deconectarse
+	Route::get('logout', 	array('as' => 'logout', 'uses' => 'HomeController@logout'));
+	
+});
+
+ App::missing( function($err) 
+{
+	// return Response::view('error404')->with('err' => $err);
+	// dd($err);
+	return View::make('error404')->with('err', $err);
+}); 

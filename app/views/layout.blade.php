@@ -23,18 +23,30 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">SICII</a>
+				<a class="navbar-brand" href="{{ route('home') }}">SICII</a>
 			</div>
 			<div class="navbar-collapse collapse">
+				@if (  Auth::check() )
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="{{ route('home') }}">Escritorio</a></li>
-					<!-- <li><a href="#">Opciones</a></li> -->
-					<li><a href="#">Perfil</a></li>
-					<li><a href="#">Ayuda</a></li>
+					<li><a href="{{ route('desktop') }}"><span class="glyphicon glyphicon-dashboard"></span> Escritorio</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span> Opciones <span class="caret"></span></a>
+						<!-- <a href="@{{ route('desktop') }}"><span class="glyphicon glyphicon-dashboard"></span> Escritorio</a> -->
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="{{ route('profile') }}"><span class="glyphicon glyphicon-user"></span> Perfil</a></li>
+							<li><a href="{{ route('logout') }}"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+						</ul>
+					</li>
+					{{--
+					<li><a href="{{ route('profile') }}"><span class="glyphicon glyphicon-user"></span> Perfil</a></li>
+					<li><a href="{{ route('student') }}"><span class="glyphicon glyphicon-cog"></span> Opciones</a></li>
+					<li><a href="{{ route('student') }}"><span class="glyphicon glyphicon-exclamation-sign"></span> Ayuda</a></li>
+					--}}
 				</ul>
-				<form class="navbar-form navbar-right">
+				@endif
+				<!-- <form class="navbar-form navbar-right">
 					<input type="text" class="form-control" placeholder="Search...">
-				</form>
+				</form> -->
 			</div>
 		</div>
 	</div>
@@ -43,22 +55,70 @@
 		<div class="row">
 			<!-- Menú lateral -->
 			<div class=" col-md-2 sidebar"><!-- col-sm-3 -->
-				<!-- <h4>Escritorio</h4>
-				<ul class="nav nav-sidebar">
-					<li><a href="">Inicio</a></li><!- -  class="active" - ->
-					<li><a href="#">Perfil</a></li>
+				<ul class="nav nav-sidebar navbar-collapse collapse">
+					{{-- Route::currentRouteName() --}}
+					{{-- Request::is('alumno/calificaciones') --}}
+					
+				@if (  Auth::check() )
+					
+					@if (  Auth::user()->type == 'student')
+					<li>
+						<a href="{{ route('student') }}" {{(Request::is('alumno') ? 'class="active"' : null)}}>
+							Alumno
+						</a>
+					</li>
+					<li>
+						<a href="{{ route('student-rating') }}" {{(Request::is('alumno/calificaciones') ? 'class="active"' : null)}}>
+							Calificaciones
+						</a>
+					</li>
+					<li>
+						<a href="{{ route('student-pay') }}" {{(Request::is('alumno/pagos') ? 'class="active"' : '')}}>
+							Pagos
+						</a>
+					</li>
+					<li>
+						<a href="{{ route('student-education') }}" {{(Request::is('alumno/educacion') ? 'class="active"' : '')}}>
+							Educación Virtual
+						</a>
+					</li>
+					<li>
+						<a href="{{ route('student') }}" {{(Request::is('') ? 'class="active"' : '')}}>
+							Asesor Académico
+						</a>
+					</li>
+					<li>
+						<a href="{{ route('student_ask_comunity') }}" {{(Request::is('alumno/comunidad') ? 'class="active"' : '')}}>
+							Comunidad de la educación
+						</a>
+					</li>
+					@endif
+					
+					
+					@if (  Auth::user()->type == 'teacher')
+					<li><a href="{{ route('teacher') }}" {{(Request::is('teacher') ? 'class="active"' : '')}}>Escritorio</a></li>
+					<li><a href="{{ route('teacher-ratings') }}" {{(Request::is('teacher-ratings') ? 'class="active"' : '')}}>Calificaciónes</a></li>
+					<li><a href="{{ route('teacher-education') }}" {{(Request::is('teacher-education') ? 'class="active"' : '')}}>Educación Virtual</a></li>
+					<li><a href="{{ route('teacher-advisor') }}" {{(Request::is('teacher-advisor') ? 'class="active"' : '')}}>Asesor Academico</a></li>
+					@endif
+				
+					@if (  Auth::user()->type == 'admin')
+					<li><a href="{{ route('desktop') }}" {{(Request::is('administrator_students') ? 'class="active"' : '')}}>Administrador</a></li>
+					<li><a href="#" >Cuentas</a></li>
+					<li><a href="#" >Configuración</a></li>
+					<li><a href="#" >Administrador</a></li>
+					<li><a href="#" >Administrador</a></li>
+					<li><a href="{{ route('administrator_students') }}" {{(Request::is('administrator_students') ? 'class="active"' : '')}}>Alumnos</a></li>
+					<li><a href="{{ route('administrator_subjects') }}" {{(Request::is('administrator_subjects') ? 'class="active"' : '')}}>Materias</a></li>
+					@endif
+				@endif
+					
 				</ul>
-				<hr>
-				<ul class="nav nav-sidebar">
-					<li><a href="{{ route('student') }}">Alumno</a></li>
-					<li><a href="{{ route('student-rating') }}">Calificacion</a></li>
-					<li><a href="{{ route('student-pay') }}">Pagos</a></li>
-					<li><a href="{{ route('student-education') }}">Educación Virtual</a></li>
-				</ul> -->
 			</div>
 			
 			<!-- Contenido -->
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				ruta [ {{ Request::path() }} ]
 				@yield('content')
 			</div>
 		</div>
