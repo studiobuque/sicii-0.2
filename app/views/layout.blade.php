@@ -104,12 +104,20 @@
 				
 					@if (  Auth::user()->type == 'admin')
 					<li><a href="{{ route('desktop') }}" {{(Request::is('administrator_students') ? 'class="active"' : '')}}>Administrador</a></li>
-					<li><a href="#" >Cuentas</a></li>
+					<li><a href="#" >Control de pagos</a></li>
+					<li><a href="#" >Historia de pagos</a></li>
 					<li><a href="#" >Configuración</a></li>
+					<hr>
+					<li><a href="#" >Inscripción de alumnos</a></li>
+					<li><a href="#" >Reporte de calificaciones</a></li>
+					<li><a href="#" >Ver un alumno</a></li>
 					<li><a href="#" >Administrador</a></li>
-					<li><a href="#" >Administrador</a></li>
+					<hr>
+					<li><a href="#" >Soporte tecnico</a></li>
+					<!-- 
 					<li><a href="{{ route('administrator_students') }}" {{(Request::is('administrator_students') ? 'class="active"' : '')}}>Alumnos</a></li>
 					<li><a href="{{ route('administrator_subjects') }}" {{(Request::is('administrator_subjects') ? 'class="active"' : '')}}>Materias</a></li>
+					 -->
 					@endif
 				@endif
 					

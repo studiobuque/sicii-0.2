@@ -3,9 +3,10 @@
 @section ('title') Alumnos :: Escritorio ::  @stop
 
 @section ('content')
-
-					BECIHE1971
-				<h1>Configuraciones</h1>
+				
+				<h1>Administración</h1>
+				
+				<h2>Administrador</h2>
 				<li>Control de págos</li>
 					<ul>
 						<li>Recepcion de pagos</li>
@@ -17,7 +18,6 @@
 								<li>Informe de los pagos (para facturar)</li>
 							</ul>
 						</li>
-						<hr>
 						<li></li>
 					</ul>
 				<li>Historial de págos</li>
@@ -34,6 +34,10 @@
 				<li>Ver un alumno</li>
 				<li>Reporte de las calificaciones</li>
 				<li>buscar un alumno</li>
+				<li>
+					Crear un estudiante (Inscripción)
+					<ul></ul>
+				</li>
 				
 
 				<h2>Soporte Tecnico</h2>

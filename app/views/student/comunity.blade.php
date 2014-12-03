@@ -10,6 +10,7 @@
 				
 				<h2>Ver las últimas aportaciones</h2>
 				
+				
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -20,13 +21,14 @@
 						</tr>
 					</thead>
 					<tbody>
-					@foreach (range(1, 4) as $index)
+					@foreach ($temas as $tema)
 						<tr>
-							<td>24/01/2014</td>
-							<td>Las mejores formas de estudiar</td>
+							<td>{{ $tema->created_at }}</td>
+							<td><a href="{{ route('student_comunity_post_view', [$tema->id]) }}">{{ $tema->title }}</a></td>
 							<td>12/34</td>
 							<td>..</td>
 						</tr>
+						<!-- {"id":"1","tema_id":"0","title":"Nuevo aporte","descripcion":"aqu\u00ed mucho texto","type":"comunity","profile_id":"20","subject_id":"41","degree_id":"2","lapse":"2","created_at":"2014-12-02 02:49:21","updated_at":"2014-12-02 02:49:21"} -->
 					@endforeach
 					</tbody>
 				</table>
@@ -35,34 +37,36 @@
 				
 				
 				<h2>Hacer una nueva aportación</h2>
-				{{ Form::open(array('route' => 'student_create_post_comunity', 'method' => 'POST')) }}
+				{{ Form::open(array('route' => 'student_comunity_post_new', 'method' => 'POST')) }}
+					<!--
+					{{ $student->degree->name }}
+					{{ $student->degree }}
+					-->
+					<input type="hidden" name="degree_id" value="{{ $student->degree->id }}">
+					
 					<p>
-						<label>Asunto</label>
+						<!-- <label>Asunto</label>
+						<input type="text" class="form-control"> -->
 						{{ Form::label('title', 'Asunto') }}
 						{{ Form::text('title', null, ['class' => 'form-control']) }}
-						<input type="text" class="form-control">
 					</p>
 					<p>
-						<textarea class="form-control" rows="5"></textarea>
+						<!-- <textarea class="form-control" rows="5"></textarea> -->
+						{{ Form::label('descripcion', 'Tu aporte') }}
+						{{ Form::textarea('descripcion', null, ['class' => 'form-control']) }}
 					</p>
 					<p>
-						{{ $student->degree->name }}
-						<hr>
-						{{-- $student->degree --}}
-						{{-- $student->degree->subjects --}}
-						{{-- Subject::where('degree_id', '=', $student->degree_id) --}}
 						
-						@foreach ($student->degree->subjects as $key)
-						{{ $key->id }} {{ $key->name }}
-							@if ( $select[] = array($key->id, $key->name ) ) @endif
-						@endforeach
-						<hr>
-						{{ $select }}
+						
 					</p>
 					<p>
-						Materia
-						{{ Form::select('size', array('A', 'b')) }}{{-- Subject::materias( ) --}}
+						{{ Form::label('subject_id', 'Elige una materia') }}
+						{{ Form::select('subject_id', $student->degree->subjects->lists('name', 'id')) }}
 					</p>
-					<button type="button" class="btn btn-primary">Enviar</button>
+					<button type="subject" class="btn btn-primary">Enviar</button>
 				{{ Form::close() }}
+				
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
 @stop
