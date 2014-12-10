@@ -29,7 +29,7 @@ class HomeController extends BaseController {
 		$data = Input::only('control', 'password', 'remember');
 		
 		// Ordenamos los datos del formulario para pasarlo autenticar
-		$credentials = ['control' => $data['control'], 'password' => $data['password']];
+		$credentials = array('control' => $data['control'], 'password' => $data['password']);
 		
 		// Verificamos si estas correctos los datos del formulario
 		if (Auth::attempt($credentials, $data['remember'])) //

@@ -37,7 +37,7 @@
 							<!-- <input type="checkbox"> Remember me -->
 							{{ Form::checkbox('remember') }} Recuerdame
 							<!-- <button type="submit" class="btn btn-success">Entrar</button> -->
-							{{ Form::submit('Crear', array('class' => 'btn btn-default')) }}
+							{{ Form::submit('Entrar', array('class' => 'btn btn-default')) }}
 						</div>
 					{{ Form::close() }}
 					
@@ -46,12 +46,12 @@
 				</div>
 				
 				<div class="col-lg-6">
-					<h1 class="page-header">Entrar como</h1>
+					<!-- <h1 class="page-header">Entrar como</h1>
 					<ul>
 						<li><a href="{{-- route('student') --}}">Alumnos</a></li>
 						<li><a href="{{-- route('teacher') --}}">Maestros</a></li>
 						<li><a href="{{-- route('administrator') --}}">Administrativo</a></li>
-					</ul>
+					</ul> -->
 				</div>
 				
 @stop

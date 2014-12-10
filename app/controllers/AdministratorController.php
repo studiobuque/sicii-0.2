@@ -58,10 +58,10 @@ class AdministratorController extends \BaseController {
 		$data = Input::all();
 		
 		$rules = array(
-			'first_name' => 'required',
-			'control' => 'required',
-			'email' => 'required',
-			'password' => 'required'
+			'first_name' 	=> 'required',
+			'control' 	=> 'required',
+			'email' 		=> 'required',
+			'password' 	=> 'required'
 		);
 		
 		$validator = Validator::make($data, $rules);

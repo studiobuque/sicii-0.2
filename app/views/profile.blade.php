@@ -9,7 +9,7 @@
 				<p>@{{ $profile }}</p>
 				
 				<p>
-				{{ Form::model($profile, ['route' => 'profile_save', 'method' => 'POST', 'role' => 'form', 'class'=>"form-horizontal"]) }}<!-- 'route' => 'profile_update', -->
+				{{ Form::model($profile, array('route' => 'profile_save', 'method' => 'POST', 'role' => 'form', 'class'=>"form-horizontal")) }}<!-- 'route' => 'profile_update', -->
 					
 					<!-- <input type="hidden" id="id" name="id" value="{{ $profile->id }}"> -->
 					

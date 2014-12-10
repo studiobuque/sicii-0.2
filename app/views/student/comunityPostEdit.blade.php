@@ -7,16 +7,37 @@
 				<h1 class="page-header">Comunidad</h1>
 				
 				
-				
 				<h2>Editar tema</h2>
-				{{-- Form::open(array('route' => 'student_comunity_post_new', 'method' => 'POST')) --}}
-				{{ Form::model($tema, array('route' => 'student_comunity_post_save', 'method' => 'POST')) }}
 					<!--
 					{{ $student->degree->name }}
 					{{ $student->degree }}
 					-->
+					
+				@if ( $tipo == "pregunta" ) 
+				
+					<h3>Estas editando una {{ $tipo }}</h3>
+					
+				{{ Form::model($tema, array('route' => 'student_comunity_post_save', 'method' => 'POST')) }}
+					
+					<!-- {{ $tema }} -->
 					<input type="hidden" name="degree_id" value="{{ $student->degree->id }}">
-					<input type="hidden" name="id" value="{{ $tema->id }}">
+					<input type="hidden" name="id" id="id" value="{{ $tema->id }}">
+					
+				@elseif ( $tipo == "respuesta" )
+				
+					<h3>Estas editando una {{ $tipo }}</h3>
+				
+				<!-- {{ Form::open(array('route' => 'student_comunity_post_save', 'method' => 'POST')) }} -->
+				{{ Form::model($tema, array('route' => 'student_comunity_post_save', 'method' => 'POST')) }}
+						
+					{{-- $tema --}}
+					<input type="hidden" name="id" id="id" value="{{ $tema->id }}">
+					<input type="hidden" name="tema_id" value="{{ $tema->tema_id }}">
+					<input type="hidden" name="subject_id" value="{{ $tema->subject_id }}">
+					<input type="hidden" name="respuesta" value="1">
+					
+					
+				@endif
 					
 					<p>
 						<!-- <label>Asunto</label>

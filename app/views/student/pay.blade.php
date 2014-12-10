@@ -4,9 +4,7 @@
 
 @section ('content')
 
-				<h1 class="page-header">Materia</h1>
-				
-				<p class="lead">Mostrar los datos de la materia</p>
+				<h1 class="page-header">Pagos</h1>
 				
 				<h2>{{ $student->first_name }}</h2>
 				

@@ -15,4 +15,9 @@ class Tema extends Eloquent {
 		return $this->belongsTo('Subject');
 	}
 	
+	public function profile()
+	{
+		return $this->belongsTo('Profile');
+	}
+	
 }

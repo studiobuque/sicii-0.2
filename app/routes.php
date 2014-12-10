@@ -12,9 +12,8 @@
 */
 
 // Ruta de usuario no conectados
-Route::get('/', 		array('as' => 'home', 'uses' => 'HomeController@index'));
-	
 Route::group(array('before' => 'guest'), function() {
+	Route::get('/', 		array('as' => 'home', 'uses' => 'HomeController@index'));
 	Route::post('login', 	array('as' => 'login', 'uses' => 'HomeController@login'));
 	Route::get('login', 	array('as' => 'login_users', 'uses' => 'HomeController@index'));
 });
@@ -23,19 +22,23 @@ Route::group(array('before' => 'guest'), function() {
 Route::group(array('before' => 'student'), function () {
 	Route::get('/', 				array('as' => 'desktop', 'uses' => 'StudentController@desktop'));
 	Route::get('alumno', 			array('as' => 'student', 'uses' => 'StudentController@desktop'));
-	Route::get('alumno/calificaciones', 	array('as' => 'student-rating', 'uses' => 'StudentController@rating'));
-	Route::get('alumno/materia', 		array('as' => 'student-subject', 'uses' => 'StudentController@subject'));
-	Route::get('alumno/pagos', 		array('as' => 'student-pay', 'uses' => 'StudentController@pay'));
-	Route::get('alumno/realizar-pago', 	array('as' => 'student-payment', 'uses' => 'StudentController@desktop'));
-	Route::get('alumno/educacion', 	array('as' => 'student-education', 'uses' => 'StudentController@education'));
-	Route::get('alumno/clase', 		array('as' => 'student-clasroom', 'uses' => 'StudentController@desktop'));
-	Route::get('alumno/foro', 		array('as' => 'student-ask', 'uses' => 'StudentController@desktop'));
-	Route::get('alumno/comunidad', 	array('as' => 'student_ask_comunity', 'uses' => 'StudentController@comunity'));
+	Route::get('alumno/calificaciones', 	array('as' => 'student_rating', 'uses' => 'StudentController@rating'));
+	Route::get('alumno/materia', 		array('as' => 'student_subject', 'uses' => 'StudentController@subject'));
+	Route::get('alumno/pagos', 		array('as' => 'student_pay', 'uses' => 'StudentController@pay'));
+	Route::get('alumno/realizar-pago', 	array('as' => 'student_payment', 'uses' => 'StudentController@desktop'));
+	Route::get('alumno/educacion', 	array('as' => 'student_education', 'uses' => 'StudentController@education'));
+	Route::get('alumno/clase', 		array('as' => 'student_clasroom', 'uses' => 'StudentController@desktop'));
+	Route::get('alumno/foro', 		array('as' => 'student_ask', 'uses' => 'StudentController@desktop'));
+	
+	Route::get('alumno/comunidad', 	array('as' => 'student_comunity', 'uses' => 'StudentController@comunity'));
 	Route::post('alumno/comunidad-post-crear', 	array('as' => 'student_comunity_post_new', 'uses' => 'StudentController@comunityPostNew'));
-	Route::get('alumno/comunidad-post-editar/{id}', array('as' => 'student_comunity_post_edit', 'uses' => 'StudentController@comunityPostEdit'));
+	Route::get('alumno/comunidad-post-editar/{tipo}/{id}', array('as' => 'student_comunity_post_edit', 'uses' => 'StudentController@comunityPostEdit'));
 	Route::post('alumno/comunidad-post-save', 	array('as' => 'student_comunity_post_save', 'uses' => 'StudentController@comunityPostSave'));
 	Route::get('alumno/comunidad-post-view/{id}', 	array('as' => 'student_comunity_post_view', 'uses' => 'StudentController@comunityPostView'));
-	Route::get('alumno/asesor', 		array('as' => 'student_ask_partner', 'uses' => 'StudentController@desktop'));
+	Route::get('alumno/comunidad-temas', array('as' => 'student_comunity_temas', 'uses' => 'StudentController@comunityPostTemas'));
+	
+	Route::get('alumno/asesor', 		array('as' => 'student_partner', 'uses' => 'StudentController@partner'));
+	Route::post('alumno/asesor-post-crear', array('as' => 'student_partner_post_new', 'uses' => 'StudentController@partnerPostNew'));
 });
 
 		
@@ -74,7 +77,7 @@ Route::group(array('before' => 'auth'), function() {
 	
 });
 
- App::missing( function($err) 
+App::missing( function($err) 
 {
 	// return Response::view('error404')->with('err' => $err);
 	// dd($err);

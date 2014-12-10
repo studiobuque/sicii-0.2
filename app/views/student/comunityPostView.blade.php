@@ -8,20 +8,81 @@
 				
 				<h2>{{ $tema->title }}</h2>
 				<p class="meta">
-					Por <strong>{{ $student->profile->first_name }}  {{ $student->profile->father_last_name }}</strong>.
-					Carrera <strong>{{ $student->profile->degree->name }}</strong>
+					Por <strong>{{ $student->first_name }}  {{ $student->father_last_name }}</strong>.
+					Carrera <strong>{{ $student->degree->name }}</strong>
 					Materia <strong>{{ $tema->subject->name }}</strong> 
 				</p>
-				<p>{{ $tema->descripcion }}</p>
+				<p>{{{ $tema->descripcion }}}</p>
 				
-				@if ($tema->profile_id == $student->profile->id )
-				<a href="{{ route('student_comunity_post_edit', [$tema->id]) }}">Editar</a>
+				@if ($tema->profile_id == $student->id )
+				<a href="{{ route('student_comunity_post_edit', array('pregunta', $tema->id)) }}" class="btn btn-primary">Editar</a>
+				<a href="#" class="btn btn-primary">Cerrar</a> 
 				@endif
 				
 				<hr>
 				
-				<a href="#"class="btn btn-primary">Responder</a>
-				<p>{{ $tema->subject }}</p>
+				<h3>Respuestas</h3>
+				
+				
+				@foreach (Tema::where('tema_id', '=', $tema->id)->get() as $respuestas)
+				
+				<div class="respuesta" style="margin-top: 20px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px 4px 0 0; padding: 0.5em 1em;">
+					
+					<h3>{{ $respuestas->title }}</h3>
+					
+					<p class="meta">
+						Por <strong>{{ $respuestas->profile->first_name }}  {{ $respuestas->profile->father_last_name }}</strong>.
+						Carrera <strong>{{ $respuestas->profile->degree->name }}</strong>
+						En <strong>{{ $tema->subject->name }}</strong> 
+					</p>
+					
+					<hr>
+					
+					<p>{{ $respuestas->descripcion }}</p>
+					
+					<hr>
+					
+					<h5>Opciones</h5>
+					
+					@if ($respuestas->profile_id == $student->id )
+					<a href="{{ route('student_comunity_post_edit', ['respuesta', $respuestas->id]) }}" class="btn btn-primary">Editar</a>
+					@endif
+					
+				</div>
+				
+				@endforeach
+				
+				<hr>
+				
+				<h3>Deja tu respuesta</h3>
+				
+				{{ Form::open(array('route' => 'student_comunity_post_new', 'method' => 'POST', 'class' => 'form-horizontal')) }}
+					
+					<input type="hidden" name="tema_id" value="{{ $tema->id }}">
+					<input type="hidden" name="subject_id" value="{{ $tema->subject_id }}">
+					<input type="hidden" name="respuesta" value="1">
+					
+					<div class="form-group">
+						{{ Form::label('title', 'Asunto', array('class'=>"col-sm-2 control-label") ) }}
+						<div class="col-sm-10">
+						{{ Form::text('title', null, array('class' => 'form-control') ) }}
+						</div>
+					</div>
+					<div class="form-group">
+						{{ Form::label('descripcion', 'Tu respuesta', array('class'=>"col-sm-2 control-label") ) }}
+						<div class="col-sm-10">
+						{{ Form::textarea('descripcion', null, array('class' => 'form-control', 'rows' => "3")) }}
+						</div>
+					</div>
+						
+					<div class="col-sm-offset-2 col-sm-10">
+						<!-- <a href="#"class="btn btn-primary">Responder</a> -->
+						<button type="subject" class="btn btn-primary">Responder</button>
+					</div>
+				
+				{{ Form::close() }}
+				
+				<!-- <p>{{ $tema->subject }}</p> -->
 				<!-- $student -->
 				<!-- {"id":"20","control":"383557137","email":"bernal.pol@live.com","type":"student","subtype":"","remember_token":"JXvLp1IbIvvRFLRlSvZ04C6zD55o8Qosc51aBWfARibgrGHXuQy6BZpFI9Ne","created_at":"2014-11-06 12:30:13","updated_at":"2014-11-21 04:24:38"} -->
 				
@@ -36,7 +97,5 @@
 				
 				<!-- $tema->subject -->
 				<!-- {"id":"41","name":"Deno consist\u00eda unos.","description":"Desmayadespierta mago universo\u00e9l de puerta rocas. Desmayadespierta del verdadmenudo qued\u00f3 no tom\u00f3 si. Le para con porque los el. Verlo paloma ah\u00ed vez dijono recorri\u00f3 final viaje. Dem\u00e1s era aparec\u00edano pod\u00eda amabasu meses. Soloahora amabasu solo Caballero f","parent":"","level":"0","degree_id":"2","lapse":"2","created_at":"2014-11-06 13:18:54","updated_at":"2014-11-06 13:18:54"} -->
-				<p>&nbsp;</p>
-				<p>&nbsp;</p>
-				<p>&nbsp;</p>
+				
 @stop

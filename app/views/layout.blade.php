@@ -62,36 +62,12 @@
 				@if (  Auth::check() )
 					
 					@if (  Auth::user()->type == 'student')
-					<li>
-						<a href="{{ route('student') }}" {{(Request::is('alumno') ? 'class="active"' : null)}}>
-							Alumno
-						</a>
-					</li>
-					<li>
-						<a href="{{ route('student-rating') }}" {{(Request::is('alumno/calificaciones') ? 'class="active"' : null)}}>
-							Calificaciones
-						</a>
-					</li>
-					<li>
-						<a href="{{ route('student-pay') }}" {{(Request::is('alumno/pagos') ? 'class="active"' : '')}}>
-							Pagos
-						</a>
-					</li>
-					<li>
-						<a href="{{ route('student-education') }}" {{(Request::is('alumno/educacion') ? 'class="active"' : '')}}>
-							Educación Virtual
-						</a>
-					</li>
-					<li>
-						<a href="{{ route('student') }}" {{(Request::is('') ? 'class="active"' : '')}}>
-							Asesor Académico
-						</a>
-					</li>
-					<li>
-						<a href="{{ route('student_ask_comunity') }}" {{(Request::is('alumno/comunidad') ? 'class="active"' : '')}}>
-							Comunidad de la educación
-						</a>
-					</li>
+					<li><a href="{{ route('student') }}" {{(Request::is('alumno') ? 'class="active"' : null)}}>Alumno</a></li>
+					<li><a href="{{ route('student_rating') }}" {{(Request::is('alumno/calificaciones') ? 'class="active"' : null)}}>Calificaciones</a></li>
+					<li><a href="{{ route('student_pay') }}" {{(Request::is('alumno/pagos') ? 'class="active"' : '')}}>Pagos</a></li>
+					<li><a href="{{ route('student_education') }}" {{(Request::is('alumno/educacion') ? 'class="active"' : '')}}>Educación Virtual</a></li>
+					<li><a href="{{ route('student_partner') }}" {{(Request::is('') ? 'class="active"' : '')}}>Asesor Académico</a>
+					<li><a href="{{ route('student_comunity') }}" {{(Request::is('alumno/comunidad') ? 'class="active"' : '')}}>Comunidad de la educación</a></li>
 					@endif
 					
 					
@@ -99,7 +75,7 @@
 					<li><a href="{{ route('teacher') }}" {{(Request::is('teacher') ? 'class="active"' : '')}}>Escritorio</a></li>
 					<li><a href="{{ route('teacher-ratings') }}" {{(Request::is('teacher-ratings') ? 'class="active"' : '')}}>Calificaciónes</a></li>
 					<li><a href="{{ route('teacher-education') }}" {{(Request::is('teacher-education') ? 'class="active"' : '')}}>Educación Virtual</a></li>
-					<li><a href="{{ route('teacher-advisor') }}" {{(Request::is('teacher-advisor') ? 'class="active"' : '')}}>Asesor Academico</a></li>
+					<li><a href="{{ route('teacher-advisor') }}" {{(Request::is('teacher-advisor') ? 'class="active"' : '')}}>Asesor Academico</a></li>{{-- --}}
 					@endif
 				
 					@if (  Auth::user()->type == 'admin')
@@ -126,7 +102,7 @@
 			
 			<!-- Contenido -->
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				ruta [ {{ Request::path() }} ]
+				<!-- ruta [ {{ Request::path() }} ] -->
 				@yield('content')
 			</div>
 		</div>
