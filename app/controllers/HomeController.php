@@ -17,10 +17,24 @@ class HomeController extends BaseController {
 
 	public function index()
 	{
-		// return View::make('desktop');
+		if (Auth::check()) {
+			$user = Auth::user();
+			$profiles = $user->profile;
+			// dd($profiles);
+			
+			if ( Auth::user()->type == 'student') {
+				return Redirect::route('student');
+			} elseif ( Auth::user()->type == 'teacher') {
+				return Redirect::route('teacher');
+			} elseif ( Auth::user()->type == 'admin') {
+				return Redirect::route('administrator');
+			} /*else {
+				return View::make('desktop')->with('profiles', $profiles);
+			}*/
+		}
+			
+		return View::make('desktop');
 		
-		$profiles = Auth::user();
-		return View::make('desktop')->with('profiles', $profiles);
 	}
 	
 	public function login()
@@ -36,18 +50,17 @@ class HomeController extends BaseController {
 		{
 			// return Redirect::back();
 			
-			/*if ( Auth::user()->type == 'student') {
-				return Redirect::route('desktop');
+			if ( Auth::user()->type == 'student') {
+				return Redirect::route('student');
 			} elseif ( Auth::user()->type == 'teacher') {
 				return Redirect::route('teacher');
-			}
 			} elseif ( Auth::user()->type == 'admin') {
 				return Redirect::route('administrator');
 			} else {
 				return Redirect::route('student');
-			}*/
+			}
 			
-			return Redirect::route('desktop');
+			// return Redirect::route('desktop');
 
 		}
 		

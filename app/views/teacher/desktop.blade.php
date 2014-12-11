@@ -1,4 +1,4 @@
-@extends ('teacher/layout')
+@extends ('layout')
 
 @section ('title') Alumnos :: Escritorio ::  @stop
 

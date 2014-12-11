@@ -11,16 +11,21 @@
 |
 */
 
+Route::get('/', 		array('as' => 'home', 'uses' => 'HomeController@index'));
+	
 // Ruta de usuario no conectados
 Route::group(array('before' => 'guest'), function() {
-	Route::get('/', 		array('as' => 'home', 'uses' => 'HomeController@index'));
 	Route::post('login', 	array('as' => 'login', 'uses' => 'HomeController@login'));
 	Route::get('login', 	array('as' => 'login_users', 'uses' => 'HomeController@index'));
 });
 
 // Rutas de los alumnos
 Route::group(array('before' => 'student'), function () {
-	Route::get('/', 				array('as' => 'desktop', 'uses' => 'StudentController@desktop'));
+	// Route::get('/', 				array('as' => 'desktop', 'uses' => 'StudentController@desktop'));
+	/*Route::get('/', 	function() {
+		dd('aquí');
+		return Redirect::route('student');
+	});*/
 	Route::get('alumno', 			array('as' => 'student', 'uses' => 'StudentController@desktop'));
 	Route::get('alumno/calificaciones', 	array('as' => 'student_rating', 'uses' => 'StudentController@rating'));
 	Route::get('alumno/materia', 		array('as' => 'student_subject', 'uses' => 'StudentController@subject'));
@@ -34,8 +39,9 @@ Route::group(array('before' => 'student'), function () {
 	Route::post('alumno/comunidad-post-crear', 	array('as' => 'student_comunity_post_new', 'uses' => 'StudentController@comunityPostNew'));
 	Route::get('alumno/comunidad-post-editar/{tipo}/{id}', array('as' => 'student_comunity_post_edit', 'uses' => 'StudentController@comunityPostEdit'));
 	Route::post('alumno/comunidad-post-save', 	array('as' => 'student_comunity_post_save', 'uses' => 'StudentController@comunityPostSave'));
-	Route::get('alumno/comunidad-post-view/{id}', 	array('as' => 'student_comunity_post_view', 'uses' => 'StudentController@comunityPostView'));
+	Route::get('alumno/comunidad-post-vier/{id}', 	array('as' => 'student_comunity_post_view', 'uses' => 'StudentController@comunityPostView'));
 	Route::get('alumno/comunidad-temas', array('as' => 'student_comunity_temas', 'uses' => 'StudentController@comunityPostTemas'));
+	// Route::get('alumno/comunidad-lista', array('as' => 'student_comunity_temas', 'uses' => 'StudentController@comunityPostTemas'));
 	
 	Route::get('alumno/asesor', 		array('as' => 'student_partner', 'uses' => 'StudentController@partner'));
 	Route::post('alumno/asesor-post-crear', array('as' => 'student_partner_post_new', 'uses' => 'StudentController@partnerPostNew'));
@@ -44,16 +50,19 @@ Route::group(array('before' => 'student'), function () {
 		
 // Rutas de los maestros
 Route::group(array('before' => 'teacher'), function () {
-	Route::get('/', 				array('as' => 'desktop', 'uses' => 'TeacherController@desktop'));
+	// Route::get('/', 				array('as' => 'desktop', 'uses' => 'TeacherController@desktop'));
 	Route::get('maestro', 			array('as' => 'teacher', 'uses' => 'TeacherController@desktop'));
-	Route::get('maestro/calificacion', 	array('as' => 'teacher-ratings', 'uses' => 'TeacherController@ratings'));
-	Route::get('maestro/educacion', 	array('as' => 'teacher-education', 'uses' => 'TeacherController@education'));
-	Route::get('maestro/asesor', 		array('as' => 'teacher-advisor', 'uses' => 'TeacherController@advisor'));
+	Route::get('maestro/calificacion', 	array('as' => 'teacher_ratings', 'uses' => 'TeacherController@ratings'));
+	Route::get('maestro/calificacion-materia/{id}', 	array('as' => 'teacher_ratings_subject', 'uses' => 'TeacherController@ratingsSubject'));
+	Route::get('maestro/educacion', 	array('as' => 'teacher_education', 'uses' => 'TeacherController@education'));
+	Route::get('maestro/asesor', 		array('as' => 'teacher_advisor', 'uses' => 'TeacherController@advisor'));
+	Route::get('maestro/asesor-post-ver/{id}', array('as' => 'teacher_advisor_post_view', 'uses' => 'TeacherController@advisorPostView'));
+	Route::post('maestro/asesor-post-new', array('as' => 'teacher_advisor_post_new', 'uses' => 'TeacherController@advisorPostNew'));
 });
 
 // Rutas para los administradores
 Route::group(array('before' => 'admin'), function () {
-	Route::get('/', 				array('as' => 'desktop', 'uses' => 'AdministratorController@desktop'));
+	// Route::get('/', 				array('as' => 'desktop', 'uses' => 'AdministratorController@desktop'));
 	Route::get('admin', 			array('as' => 'administrator', 'uses' => 'AdministratorController@desktop'));
 	Route::get('admin/materias', 		array('as' => 'administrator_subjects', 'uses' => 'AdministratorController@listSubject'));
 	Route::get('admin/materia/{subject}/{id}', 	

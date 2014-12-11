@@ -1,14 +1,14 @@
 @extends ('layout')
 
-@section ('title') Alumnos :: Comunidad ::  @stop
+@section ('title')Asesor Adémico ::  @stop
 
 @section ('content')
 
-				<h1 class="page-header">Comunidad</h1>
-				<!-- <h2 class="text-center">{{ $student->first_name }}</h2> -->
+				<h1 class="page-header">Asesor Adémico</h1>
 				
-				<h2>Hacer una nueva aportación</h2>
-				{{ Form::open(array('route' => 'student_comunity_post_new', 'method' => 'POST')) }}
+				
+				<h2>Hacer una pregunta</h2>
+				{{ Form::open(array('route' => 'student_partner_post_new', 'method' => 'POST')) }}
 					<!--
 					{{ $student->degree->name }}
 					{{ $student->degree }}
@@ -61,8 +61,5 @@
 					</tbody>
 					
 				</table>
-				
-				
-				<p><a href="{{ route('student_comunity_temas') }}">Ver todos los temas</a></p>
 				
 @stop

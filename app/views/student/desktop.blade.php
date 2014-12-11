@@ -14,6 +14,13 @@
 					<dd>{{ $student->address }}</dd>
 					<dt>Teléfono</dt>
 					<dd>{{ $student->phone }}</dd>
+					<dt>Carrera</dt>
+					<dd>{{ $student->degree->name }}</dd>
+					<!-- 
+					$student
+					{"id":"20","user_id":"20","degree_id":"2","first_name":"Sergio","father_last_name":"Monta\u00f1ez","mother_last_name":"Cornejo","address":"Camino Silvia, 1, Bajos","phone":"612-36-6505","movile":"943 842342","created_at":"2014-11-06 12:30:13","updated_at":"2014-11-27 05:52:49","user":{"id":"20","control":"383557137","email":"bernal.pol@live.com","type":"student","subtype":"","remember_token":"JXvLp1IbIvvRFLRlSvZ04C6zD55o8Qosc51aBWfARibgrGHXuQy6BZpFI9Ne","created_at":"2014-11-06 12:30:13","updated_at":"2014-11-21 04:24:38"}}
+					$student->degree
+					{"id":"2","name":"Derecho","description":"El Osad\u00eda decirlessus Entonces la empezandodisfrutar. Dijolosno silencioso alel cima familia. Estando brillantelos Su armadura el Castillo caballo. Rey la los entendi Voluntadla pensar. Para muy paloma castillos los De yaera. Entendi entendieran Al los Me","lapse":"8","mode":"semestral","created_at":"2014-11-06 13:18:54","updated_at":"2014-11-06 13:18:54"} -->
 				</dl>
 				
 				<div class="col-lg-6">

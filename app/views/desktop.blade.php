@@ -13,8 +13,8 @@
 				<div class="col-lg-6">
 					<h1 class="page-header">Login</h1>
 					
-					
 					@if (Auth::check())
+					{{ $profiles }}
 					
 					Hola {{ Auth::user()->profile->first_name}}
 					
@@ -45,13 +45,6 @@
 					@endif
 				</div>
 				
-				<div class="col-lg-6">
-					<!-- <h1 class="page-header">Entrar como</h1>
-					<ul>
-						<li><a href="{{-- route('student') --}}">Alumnos</a></li>
-						<li><a href="{{-- route('teacher') --}}">Maestros</a></li>
-						<li><a href="{{-- route('administrator') --}}">Administrativo</a></li>
-					</ul> -->
-				</div>
+				<div class="col-lg-6"></div>
 				
 @stop

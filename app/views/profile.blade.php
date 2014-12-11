@@ -6,7 +6,7 @@
 
 				<h1>Edita tus datos</h1>
 				
-				<p>@{{ $profile }}</p>
+				<p>{{-- $profile --}}</p>
 				
 				<p>
 				{{ Form::model($profile, array('route' => 'profile_save', 'method' => 'POST', 'role' => 'form', 'class'=>"form-horizontal")) }}<!-- 'route' => 'profile_update', -->
@@ -14,7 +14,7 @@
 					<!-- <input type="hidden" id="id" name="id" value="{{ $profile->id }}"> -->
 					
 					@if ( $data = $profile->toArray())
-					{{ $data }} 
+					{{-- var_dump($data) --}} 
 						{{--@foreach ($data as $key => $value) 
 						<p>{{ $key }} = {{ $value }} </p>
 						@endforeach  --}}

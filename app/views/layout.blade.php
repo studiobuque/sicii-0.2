@@ -28,7 +28,7 @@
 			<div class="navbar-collapse collapse">
 				@if (  Auth::check() )
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="{{ route('desktop') }}"><span class="glyphicon glyphicon-dashboard"></span> Escritorio</a></li>
+					<li><a href="{{ route('home') }}"><span class="glyphicon glyphicon-dashboard"></span> Escritorio</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span> Opciones <span class="caret"></span></a>
 						<!-- <a href="@{{ route('desktop') }}"><span class="glyphicon glyphicon-dashboard"></span> Escritorio</a> -->
@@ -73,9 +73,9 @@
 					
 					@if (  Auth::user()->type == 'teacher')
 					<li><a href="{{ route('teacher') }}" {{(Request::is('teacher') ? 'class="active"' : '')}}>Escritorio</a></li>
-					<li><a href="{{ route('teacher-ratings') }}" {{(Request::is('teacher-ratings') ? 'class="active"' : '')}}>Calificaciónes</a></li>
-					<li><a href="{{ route('teacher-education') }}" {{(Request::is('teacher-education') ? 'class="active"' : '')}}>Educación Virtual</a></li>
-					<li><a href="{{ route('teacher-advisor') }}" {{(Request::is('teacher-advisor') ? 'class="active"' : '')}}>Asesor Academico</a></li>{{-- --}}
+					<li><a href="{{ route('teacher_ratings') }}" {{(Request::is('teacher-ratings') ? 'class="active"' : '')}}>Calificaciónes</a></li>
+					<li><a href="{{ route('teacher_education') }}" {{(Request::is('teacher-education') ? 'class="active"' : '')}}>Educación Virtual</a></li>
+					<li><a href="{{ route('teacher_advisor') }}" {{(Request::is('teacher-advisor') ? 'class="active"' : '')}}>Asesor Academico</a></li>{{-- --}}
 					@endif
 				
 					@if (  Auth::user()->type == 'admin')

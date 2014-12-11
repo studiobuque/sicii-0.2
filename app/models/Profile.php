@@ -20,6 +20,6 @@ class Profile extends \Eloquent {
 	
 	public function rating()
 	{
-		return $this->hasMany('Rating');
+		return $this->hasOne('Rating');
 	}
 }

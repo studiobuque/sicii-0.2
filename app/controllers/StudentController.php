@@ -76,6 +76,7 @@ class StudentController extends \BaseController {
 				'descripcion'		=> 'required',
 				'subject_id'		=> 'required',
 			);
+			
 		// Si es una respuesta
 		} else {
 			
@@ -106,7 +107,7 @@ class StudentController extends \BaseController {
 		$validation = Validator::make($dataUpload, $rules);
 		if ($validation) {
 			
-			// Guardar en uno nuevo
+			// Guardar uno nuevo
 			if ($thema = Tema::create($dataUpload)){
 				
 				// Si se guardo redirecionamos para verlo
@@ -197,10 +198,95 @@ class StudentController extends \BaseController {
 	
 	public function comunityPostTemas()
 	{
+		$student = Auth::user()->profile;
 		// $tema = Tema::find($id);
-		$temas = Tema::where('tema_id', '=', '0')->orderBy('updated_at', 'DESC')->paginate(10);;//all()->get()
+		// $temas = Tema::where('tema_id', '=', '0')->orderBy('updated_at', 'DESC')->paginate(10); //all()->get()
+		$temas = Tema::where('tema_id', '=', '0')->where('type', '=', 'comunity')->orderBy('updated_at', 'DESC')->paginate(10); //all()->get()
 		
-		return View::make('student/comunityPostTemas')->with(array('student' => $student, 'tema' => $tema));
+		return View::make('student/comunityPostTemas')->with(array('student' => $student, 'temas' => $temas));
+	}
+	
+	public function partner()
+	{
+		$student = Auth::user()->profile;
+		$temas = Tema::where('tema_id', '=', '0')->where('type', '=', 'partner')->orderBy('updated_at', 'DESC')->paginate(5);;//all()->get()
+		
+		return View::make('student/partner')->with(array('student' => $student, 'temas' => $temas));
+	}
+	
+	public function partnerPostNew()
+	{
+		// Obtenemos los datos
+		$data = Input::all();
+		$student = Auth::user()->profile;
+		$subject = Subject::find($data['subject_id']);
+		
+		// Si no es una respuesta
+		if ( ! $data['respuesta']) {
+			
+			// Organizamos los datos del formulario
+			$dataUpload =array(
+				'title'			=> $data['title'],
+				'descripcion'		=> $data['descripcion'],
+				'profile_id'		=> $student->id,
+				'type'			=> 'partner',
+				
+				'subject_id'		=> $data['subject_id'],
+				'degree_id'		=> $subject->degree_id,
+				'lapse'			=> $subject->lapse,
+				
+			);
+			
+			// Creamos las reglas
+			$rules = array(
+				'title'			=> 'required',
+				'descripcion'		=> 'required',
+				'subject_id'		=> 'required',
+			);
+		// Si es una respuesta
+		} else {
+			
+			// Organizamos los datos del formulario
+			$dataUpload =array(
+				'title'			=> $data['title'],
+				'descripcion'		=> $data['descripcion'],
+				'profile_id'		=> $student->id,
+				'type'			=> 'partner',
+				
+				'tema_id'		=> $data['tema_id'],
+				'subject_id'		=> $data['subject_id'],
+				'degree_id'		=> $subject->degree_id,
+				'lapse'			=> $subject->lapse,
+				
+			);
+			
+			// Creamos las reglas
+			$rules = array(
+				'tema_id'		=> 'required',
+				'title'			=> 'required',
+				'descripcion'		=> 'required',
+				'subject_id'		=> 'required',
+			);
+		}
+		
+		// Validar el formulario con las reglas
+		$validation = Validator::make($dataUpload, $rules);
+		if ($validation) {
+			
+			// Guardar en uno nuevo
+			if ($thema = Tema::create($dataUpload)){
+				
+				// Si se guardo redirecionamos para verlo
+				if ( ! $data['respuesta']) {
+					return Redirect::route('student_comunity_post_view', array('id' => $thema->id));
+				} else {
+					return Redirect::route('student_comunity_post_view', array('id' => $thema->tema_id));
+				}
+			}	
+		}
+			
+		// Regresamos el mensaje con errores
+		return Redirect::back()->withInput()->withErrors($validation);
 	}
 	
 }

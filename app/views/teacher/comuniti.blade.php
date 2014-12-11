@@ -1,4 +1,4 @@
-@extends ('teacher/layout')
+@extends ('layout')
 
 @section ('title') Profesor :: Cominudad del Conocimiento ::  @stop
 
