@@ -1,11 +1,16 @@
 @extends ('layout')
 
-@section ('title') Alumnos :: Comunidad ::  @stop
+@section ('title') Comunidad del Conocimiento ::  @stop
 
 @section ('content')
 
-				<h1 class="page-header">Comunidad</h1>
+				<h1 class="page-header">Comunidad del Conocimiento</h1>
 				
+				<ol class="breadcrumb">
+					<li><a href="{{ route('student') }}">Estudiante</a></li>
+					<li><a href="{{ route('student_comunity') }}">Comunidad</a></li>
+					<li class="active">Lista de temas</li>
+				</ol>
 				
 				<table class="table table-striped">
 					<thead>

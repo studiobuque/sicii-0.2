@@ -45,6 +45,7 @@
 					@endif
 				</div>
 				
-				<div class="col-lg-6"></div>
+				<div class="col-lg-6">&nbsp;</div>
+				<div style="clear:both;"></div>
 				
 @stop

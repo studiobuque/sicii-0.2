@@ -3,40 +3,46 @@
 @section ('title') Alumnos :: Escritorio ::  @stop
 
 @section ('content')
-
-				<h1>Configuraciones</h1>
-				<li>Control de págos</li>
-					<ul>
-						<li>Recepcion de pagos</li>
-						<li>crear cargos</li>
-						<li>Crear descuentos</li>
-						<li>Reporte de pagos
-							<ul>
-								<li>Informe de los deudores</li>
-								<li>Informe de los pagos (para facturar)</li>
-							</ul>
-						</li>
-						<hr>
-						<li></li>
-					</ul>
-					BECIHE1971
-				<li>Historial de págos</li>
-				<li>Configuración
-					<ul>
-						<li>Configuracion de págos</li>
-						<li>Configuración de materia</li>
-						<li>Configuración de usuarios</li>
-						<li>Configuración del servidor</li>
-					</ul>
-				</li>
+				<h1 class="page-header">Configuración</h1>
 				
-				<h2>Control Escolar</h2>
-				<li>Ver un alumno</li>
-				<li>Reporte de las calificaciones</li>
-				<li>buscar un alumno</li>
+				<div class="col-lg-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h2 class="panel-title">Configuracion de págos</h2>
+						</div>
+						<div class="panel-body">
+							<p></p>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h2 class="panel-title">Configuración de materia</h2>
+						</div>
+						<div class="panel-body">
+							<p><a href="{{ route('administrator_subjects') }}">Ver materias</a></p>
+							<p><a href="{{ route('administrator_subjects') }}">Crear materia</a></p>
+						</div>
+					</div>
+				</div>
 				
+				<div class="col-lg-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h2 class="panel-title">Configuración de usuarios</h2>
+						</div>
+						<div class="panel-body">
+							<p><a href="{{ route('administrator_user') }}">Crear usuarios</a></p>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h2 class="panel-title">Configuración de profesores</h2>
+						</div>
+						<div class="panel-body">
+							<p><a href="{{ route('administrator_teacher') }}">Crear profesor</a></p>
+							<p><a href="{{ route('administrator_teacher_asignar') }}">Asignar materias al profesor</a></p>
+						</div>
+					</div>
+				</div>
 				
-				<h2>Soporte Tecnico</h2>
-				
-				<li>Formulaio de contacto</li>
 @stop

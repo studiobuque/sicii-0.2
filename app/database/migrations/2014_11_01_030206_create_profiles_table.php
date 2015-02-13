@@ -18,11 +18,15 @@ class CreateProfilesTable extends Migration {
 			$table->integer('user_id')->unsigned()->foreign('user_id')->references('id')->on('users');
 			// Carrera vinculada
 			$table->integer('degree_id')->unsigned()->foreign('degree_id')->references('id')->on('degrees');
+			$table->integer('lapse', 3);
+			
+			
+			
 			// Todos los datos necesarios para la UCIL
-			$table->string('first_name');
+			$table->string('first_name');		// Key
 			$table->string('father_last_name');
 			$table->string('mother_last_name');
-			$table->string('address');
+			$table->string('address');		// Value
 			$table->string('phone');
 			$table->string('movile');
 			

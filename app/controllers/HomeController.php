@@ -18,9 +18,8 @@ class HomeController extends BaseController {
 	public function index()
 	{
 		if (Auth::check()) {
+			
 			$user = Auth::user();
-			$profiles = $user->profile;
-			// dd($profiles);
 			
 			if ( Auth::user()->type == 'student') {
 				return Redirect::route('student');
@@ -90,16 +89,40 @@ class HomeController extends BaseController {
 		$data = Input::all();
 		$profile = Auth::user()->profile;
 		
-		// $manager = Profile($data);
-		$manager = Profile::find($profile->id);
-		$manager->fill($data);
-		$manager->save();
+		// Organizamos los datos del formulario
+		$dataUpload =array(
+			'address'	=> $data['address'],
+			'phone'		=> $data['phone'],
+			'movile'		=> $data['movile'],
+			
+		);
 		
-		// dd($manager);
+		// Creamos las reglas
+		$rules = array(
+			'address'	=> 'required',
+			'phone'		=> 'required|numeric',
+			'movile'		=> 'required|numeric',
+		);
 		
-		// return Response::json($data);
-		return View::make('profile')->with('profile', $manager);
-		return Redirect::route('profile');
+		// Validar el formulario con las reglas
+		$validation = Validator::make($dataUpload, $rules);
+		if ($validation->passes()) {
+			
+			// $manager = Profile($data);
+			$manager = Profile::find($profile->id);
+			$manager->fill($data);
+			
+			if ($manager->save()) {
+				
+				// return Response::json($data);
+				// return Redirect::route('profile');
+				return View::make('profile')->with('profile', $manager)->with(array('alert' => array('mensaje' => 'Se guardo correctamente', 'estilo' => 'success', 'is_ico' => true, 'ico' => 'ok')));
+			}
+			
+		}
+		
+		return Redirect::back()->withInput()->withErrors($validation)->with(array('alert' => array('mensaje' => 'Se guardo correctamente', 'estilo' => 'success', 'is_ico' => true, 'ico' => 'ok')));
+			
 	}
 
 

@@ -1,52 +1,25 @@
 @extends ('layout')
 
-@section ('title') Alumnos :: Comunidad ::  @stop
+@section ('title') Comunidad del Conocimiento ::  @stop
 
 @section ('content')
 
-				<h1 class="page-header">Comunidad</h1>
+				<h1 class="page-header">Comunidad del Conocimiento</h1>
 				<!-- <h2 class="text-center">{{ $student->first_name }}</h2> -->
 				
-				<h2>Hacer una nueva aportación</h2>
-				{{ Form::open(array('route' => 'student_comunity_post_new', 'method' => 'POST')) }}
-					<!--
-					{{ $student->degree->name }}
-					{{ $student->degree }}
-					-->
-					<input type="hidden" name="degree_id" value="{{ $student->degree->id }}">
-					<input type="hidden" name="respuesta" value="0">
-					
-					<p>
-						<!-- <label>Asunto</label>
-						<input type="text" class="form-control"> -->
-						{{ Form::label('title', 'Asunto') }}
-						{{ Form::text('title', null, array('class' => 'form-control')) }}
-					</p>
-					<p>
-						<!-- <textarea class="form-control" rows="5"></textarea> -->
-						{{ Form::label('descripcion', 'Tu aporte') }}
-						{{ Form::textarea('descripcion', null, array('class' => 'form-control')) }}
-					</p>
-					<p>
-						
-						
-					</p>
-					<p>
-						{{ Form::label('subject_id', 'Elige una materia') }}
-						{{ Form::select('subject_id', $student->degree->subjects->lists('name', 'id')) }}
-					</p>
-					<button type="subject" class="btn btn-primary">Enviar</button>
-				{{ Form::close() }}
+				<!-- <h2>Ver las últimas aportaciones</h2> -->
 				
-				<hr>
-				
-				<h2>Ver las últimas aportaciones</h2>
-				
+				<p>
+					<a href="{{ route('student_comunity_post') }}" class="btn btn-success">Crear nuevo tema</a>
+					<a href="{{ route('student_comunity_temas') }}" class="btn btn-default">Ver todos los temas</a>
+				</p>
 				
 				<table class="table table-striped">
 					<thead>
 						<tr>
 							<th>Tema</th>
+							<th>Autor</th>
+							<th>Fecha</th>
 							<th>Materia</th>
 						</tr>
 					</thead>
@@ -54,6 +27,8 @@
 					@foreach ($temas as $tema)
 						<tr>
 							<td><a href="{{ route('student_comunity_post_view', array($tema->id)) }}">{{ $tema->title }}</a></td>
+							<td>{{ $tema->profile->first_name }} {{ $tema->profile->father_last_name }} {{ $tema->profile->mother_last_name }}</td>
+							<td>{{ $tema->created_at }}</td>
 							<td>{{ $tema->subject->name }}</td>
 						</tr>
 						<!-- {"id":"1","tema_id":"0","title":"Nuevo aporte","descripcion":"aqu\u00ed mucho texto","type":"comunity","profile_id":"20","subject_id":"41","degree_id":"2","lapse":"2","created_at":"2014-12-02 02:49:21","updated_at":"2014-12-02 02:49:21"} -->
@@ -62,7 +37,9 @@
 					
 				</table>
 				
-				
-				<p><a href="{{ route('student_comunity_temas') }}">Ver todos los temas</a></p>
+				<p>
+					<a href="{{ route('student_comunity_post') }}" class="btn btn-success">Crear nuevo tema</a>
+					<a href="{{ route('student_comunity_temas') }}" class="btn btn-default">Ver todos los temas</a>
+				</p>
 				
 @stop

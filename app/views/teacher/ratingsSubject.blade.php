@@ -21,11 +21,12 @@
 							<td>{{ $student->first_name }} {{ $student->father_last_name }} {{ $student->mother_last_name }}</td>
 							@if ( $rating_p = Rating::where('profile_id', $student->id)->where('subject_id', $subject->id)->get()) @endif
 							<td>
-								{{ $rating_p->first()->rating }}
+								{{ $student->id }} / {{ $subject->id }}
+								{{-- $rating_p->first() --}}
 							</td>
 							{{--{"id":"1","profile_id":"1","subject_id":"38","degree_id":"2","lapse":"1","rating":"9.99","created_at":"2014-11-06 14:56:58","updated_at":"2014-11-06 14:56:58"}--}}
 							<td>0</td>
-							<td>A B C</td>
+							<td>...</td>
 						</tr>
 						<!-- {"id":"1","tema_id":"0","title":"Nuevo aporte","descripcion":"aqu\u00ed mucho texto","type":"comunity","profile_id":"20","subject_id":"41","degree_id":"2","lapse":"2","created_at":"2014-12-02 02:49:21","updated_at":"2014-12-02 02:49:21"} -->
 					@endforeach

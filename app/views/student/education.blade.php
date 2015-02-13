@@ -1,6 +1,6 @@
 @extends ('layout')
 
-@section ('title')Mis Calificaciónes ::  @stop
+@section ('title')Educación Virtual ::  @stop
 
 @section ('content')
 
@@ -13,23 +13,26 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
+							<th>Título</th>
 							<th>Fecha</th>
-							<th>Tema</th>
-							<th>No se</th>
-							<th>Ver</th>
+							<th>Materia</th>
+							<th>Carrera</th>
 						</tr>
 					</thead>
 					<tbody>
-	@foreach (range(1, 4) as $index)
+						@foreach ($educations as $education)
 						<tr>
-							<td>24/01/2014</td>
-							<td>Las mejores formas de estudiar</td>
-							<td>Algo más</td>
+							<td><a href="{{ route('student_education_view', array($education->id)) }}">{{ $education->title }}</a></td>
+							<td>{{ $education->created_at }}</td>
+							<td>{{ $education->subject->name }}</td>
+							<td>{{ $education->subject->degree->name }}</td>
 							<td>..</td>
 						</tr>
-	@endforeach
+						@endforeach
 					</tbody>
 				</table>
+				
+				{{-- $educations --}}
 				<!-- 
 				<div class="col-lg-6">
 					<h3>Asesor Académico</h3>

@@ -1,18 +1,23 @@
 @extends ('layout')
 
-@section ('title') Alumnos :: Comunidad ::  @stop
+@section ('title') Comunidad del Conocimiento ::  @stop
 
 @section ('content')
 
-				<h1 class="page-header">Comunidad</h1>
+				<h1 class="page-header">Comunidad del Conocimiento</h1>
 				
+				<ol class="breadcrumb">
+					<li><a href="{{ route('student') }}">Estudiante</a></li>
+					<li><a href="{{ route('student_comunity') }}">Comunidad</a></li>
+					<li class="active">Editar tema "{{ $tema->title }}"</li>
+				</ol>
 				
-				<h2>Editar tema</h2>
+				<!-- <h2>Editar tema</h2> -->
 					<!--
 					{{ $student->degree->name }}
 					{{ $student->degree }}
 					-->
-					
+				
 				@if ( $tipo == "pregunta" ) 
 				
 					<h3>Estas editando una {{ $tipo }}</h3>
@@ -49,7 +54,7 @@
 					<p>
 						<!-- <textarea class="form-control" rows="5"></textarea> -->
 						{{ Form::label('descripcion', 'Tu aporte') }}
-						{{ Form::textarea('descripcion', null, ['class' => 'form-control']) }}
+						{{ Form::textarea('descripcion', null, array('class' => 'form-control')) }}
 					</p>
 					<p>
 						
@@ -59,10 +64,22 @@
 						{{ Form::label('subject_id', 'Elige una materia') }}
 						{{ Form::select('subject_id', $student->degree->subjects->lists('name', 'id'), array('class' => 'form-control', 'disabled' => 'disabled')) }}
 					</p> --}}
-					<button type="subject" class="btn btn-primary">Guardar</button>
+					<button type="subject" class="btn btn-success">Guardar</button>
 				{{ Form::close() }}
 				
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
 @stop
+
+
+<script>
+
+@section('script') 
+			tinymce.init({
+				selector:"textarea#descripcion",
+				plugins: ["link paste anchor preview"],
+			});
+@stop
+
+</script>

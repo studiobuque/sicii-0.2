@@ -2,7 +2,9 @@
 
 
 class Profile extends \Eloquent {
+	protected $fillable = array('user_id', 'first_name', 'father_last_name', 'mother_last_name', 'address', 'phone', 'movile');
 	protected $guarded = array();
+	
 
 	public static $rules = array();
 	

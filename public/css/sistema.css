@@ -1,8 +1,11 @@
-@import url(http://fonts.googleapis.com/css?family=Arvo);
+/*@import url(http://fonts.googleapis.com/css?family=Arvo);*/
+
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
 
 body
 {
-	font-family: 'Arvo', serif;
+	/*font-family: 'Arvo', Georgia, serif;*/
+	font-family: 'Lato', sans-serif;
 	font-size: 16px;
 }
 
@@ -13,7 +16,7 @@ body
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-  padding-top: 50px;
+	padding-top: 50px;
 }
 
 
@@ -22,8 +25,8 @@ body {
  */
 
 .sub-header {
-  padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
 }
 
 /*
@@ -31,7 +34,7 @@ body {
  * Hide default border to remove 1px line.
  */
 .navbar-fixed-top {
-  border: 0;
+	border: 0;
 }
 
 /*
@@ -40,58 +43,101 @@ body {
 
 /* Hide for mobile, show later */
 .sidebar {
-  /*display: none;*/
+	/*display: none;*/
 }
 @media (min-width: 768px) {
-  .sidebar {
-    position: fixed;
-    top: 51px;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-    display: block;
-    padding: 20px;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #f5f5f5;
-    border-right: 1px solid #eee;
-  }
-}
+	.sidebar {
+		position: fixed;
+		top: 51px;
+		bottom: 0;
+		left: 0;
+		z-index: 1000;
+		display: block;
+		padding: 20px;
+		overflow-x: hidden;
+		overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+		/*
+		background-color: #f5f5f5;
+		background-color: #FEFFEE;
+		background-color: #000043;
+		*/
+		background-color: #04042C;
+		border-right: 1px solid #eee;
+	}
+	.sidebar a{
+		color: #CACAE3;
+	}
+	
+	.main .page-header {
+		background-color: #FEFFEE;
+		padding: 0.2em 0.5em;
+	}
+	
+	/* Sidebar navigation */
+	.navbar-default{
+		background: #04042C;
+	}
+	.nav-sidebar {
+		margin-right: -21px; /* 20px padding + 1px border */
+		margin-bottom: 20px;
+		margin-left: -20px;
+	}
+	.nav-sidebar > li > a {
+		padding-right: 20px;
+		padding-left: 20px;
+	}
+	.nav > li > a:hover,
+	.nav > li > a:focus,
+	.nav-sidebar a:focus,
+	.nav-sidebar a.active,
+	.nav-sidebar a.active:hover,
+	.nav-sidebar a.active:focus {		/*color: #2a6496;*/
+		color: #FFFFFF;
+		/*
+		background-color: #eee;
+		background-color: #EEEFDF;
+		*/
+		background-color: #00325D;
+	}
+	.navbar-default
+	.navbar-brand{
+		color: #fff;
+	}
+	.navbar-brand small{
+		color: #AEAEAE;
+	}
+	.navbar-default .navbar-nav > li > a{
+		color: #AEAEAE;
+	}
+	.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+		color: #FFF;
+	}
+	/*.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
+		background-color: #FEFFEE;
+	}*/
+	
+	.table th{
+		word-wrap: normal;
+	}
 
-/* Sidebar navigation */
-.nav-sidebar {
-  margin-right: -21px; /* 20px padding + 1px border */
-  margin-bottom: 20px;
-  margin-left: -20px;
 }
-.nav-sidebar > li > a {
-  padding-right: 20px;
-  padding-left: 20px;
-}
-.nav-sidebar a.active,
-.nav-sidebar a.active:hover,
-.nav-sidebar a.active:focus {
-  color: #2a6496;
-  background-color: #eee;
-}
-
-
 /*
  * Main content
  */
 
 .main {
-  padding: 20px;
+	padding: 20px;
+	/*background: #FEFFEE;*/
 }
 @media (min-width: 768px) {
-  .main {
-    padding-right: 40px;
-    padding-left: 40px;
-    margin-bottom: 4em;
-  }
+	.main {
+		padding-right: 40px;
+		padding-left: 40px;
+		margin-bottom: 4em;
+	}
 }
 .main .page-header {
-  margin-top: 0;
+	margin-top: 0;
 }
 
 
@@ -100,16 +146,16 @@ body {
  */
 
 .placeholders {
-  margin-bottom: 30px;
-  text-align: center;
+	margin-bottom: 30px;
+	text-align: center;
 }
 .placeholders h4 {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 .placeholder {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 .placeholder img {
-  display: inline-block;
-  border-radius: 50%;
+	display: inline-block;
+	border-radius: 50%;
 }
