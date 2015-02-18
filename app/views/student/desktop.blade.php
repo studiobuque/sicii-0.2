@@ -34,7 +34,50 @@
 					</div>
 				</div> -->
 				
-				<div class="col-lg-6">
+				<div class="col-md-4">
+					<div class="panel panel-default text-center">
+						<h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1>
+							Educación Virtual
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="panel panel-default text-center">
+						<h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1>
+							Asesor Académico
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="panel panel-default text-center">
+						<h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1>
+							Comunidad del Conocimiento
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="panel panel-default text-center">
+						<h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1>
+							Digital Book
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="panel panel-default text-center">
+						<h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1>
+							Control Escolar
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="panel panel-default text-center">
+						<h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1>
+							Administración
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="panel panel-default text-center">
+						<h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1>
+							Soporte Técnico
+					</div>
+				</div>
+				
+				<div class="col-md-6">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h2 class="panel-title">Últimos Pagos</h2>
@@ -53,7 +96,7 @@
 					</div>
 				</div>
 				
-				<div class="col-lg-6">
+				<div class="col-md-6">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h2 class="panel-title">Educación Virtual</h2>

@@ -12,6 +12,9 @@
 					<li><a href="{{ route('student_comunity') }}">Comunidad</a></li>
 					<li class="active">Nuevo tema</li>
 				</ol>
+					<p class="text-right">
+						Ayuda <span class="glyphicon glyphicon-question-sign text-warning" aria-hidden="true"></span>
+					</p>
 				
 				<h2>Hacer una nueva aportación</h2>
 				{{ Form::open(array('route' => 'student_comunity_post_new', 'method' => 'POST', 'class' => 'form-horizontal')) }}
@@ -23,29 +26,23 @@
 					<input type="hidden" name="respuesta" value="0">
 					
 					<div class="form-group">
-						<!-- <label>Asunto</label>
-						<input type="text" class="form-control"> -->
-						{{ Form::label('title', 'Asunto', array('class'=>"col-sm-2 control-label")) }}
-						<div class="col-sm-10">
+						{{ Form::label('title', 'Asunto', array('class'=>"control-label")) }}
 						{{ Form::text('title', null, array('class' => 'form-control')) }}
-						</div>
+						{{ $errors->first('title', '<div class=" alert  alert-danger" role="alert">:message</div>'); }}
 					</div>
 					<div class="form-group">
-						<!-- <textarea class="form-control" rows="5"></textarea> -->
-						{{ Form::label('descripcion', 'Tu aporte', array('class'=>"col-sm-2 control-label")) }}
-						<div class="col-sm-10">
+						{{ Form::label('descripcion', 'Tu aporte', array('class'=>"control-label")) }}
 						{{ Form::textarea('descripcion', null, array('class' => 'form-control')) }}
-						</div>
+						{{ $errors->first('descripcion', '<div class=" alert  alert-danger" role="alert">:message</div>'); }}
 					</div>
 					<div class="form-group">
-						{{ Form::label('subject_id', 'Elige una materia', array('class'=>"col-sm-2 control-label")) }}
-						<div class="col-sm-10">
-						{{ Form::select('subject_id', $student->degree->subjects->lists('name', 'id')) }}
-						</div>
+						{{ Form::label('subject_id', 'Elige una materia', array('class'=>"control-label")) }}
+						{{ Form::select('subject_id', $student->degree->lists('name', 'id')) }}
+						{{ $errors->first('subject_id', '<div class=" alert  alert-danger" role="alert">:message</div>'); }}
 					</div>
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="subject" class="btn btn-success">Guardar</button>
-					</div>
+					
+					<button type="subject" class="btn btn-success">Guardar</button>
+					
 				{{ Form::close() }}
 				
 				

@@ -23,7 +23,7 @@ class TeacherController extends \BaseController {
 	// Calificaciones
 	public function ratings()
 	{
-		$degree = Degree::find(2);
+		$degree = Degree::find(1);
 		return View::make('teacher/ratings')->with('degree', $degree);
 	}
 	

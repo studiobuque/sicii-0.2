@@ -12,7 +12,7 @@
 				<div class="row">
 					<div class="col-xs-6">
 					@foreach(range(1, $degree->lapse) as $lapse_num)
-					<h4>Periodo {{ $lapse_num }}</h4>
+					<h4>Cuatrimestre {{ $lapse_num }}</h4>
 						
 						<div class="list-group">
 						@if ($subjects_lapse = Subject::where('degree_id', $degree->id)->where('lapse', $lapse_num)->get() ) @endif
@@ -39,8 +39,15 @@
 					</div>
 				</div>
 				
+				{{--
+				<div class="row">
+					@foreach($degree->subjects as $subjects)
+						<li>{{ $subjects->name }}</li>
+					@endforeach
+				
 				
 					<p>Luego los alumnos</p>
+				</div>--}}
 				
 				
 @stop

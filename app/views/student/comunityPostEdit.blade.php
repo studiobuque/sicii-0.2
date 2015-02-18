@@ -48,12 +48,14 @@
 						<!-- <label>Asunto</label>
 						<input type="text" class="form-control"> -->
 						{{ Form::label('title', 'Asunto') }}
+						{{ $errors->first('title', '<p class="bg-danger" style="padding: 15px;">:message</p>'); }}
 						{{-- Form::text('title', null, array('class' => 'form-control', 'disabled' => 'disabled') ) --}}
 						{{ Form::text('title', null, array('class' => 'form-control') ) }}
 					</p>
 					<p>
 						<!-- <textarea class="form-control" rows="5"></textarea> -->
 						{{ Form::label('descripcion', 'Tu aporte') }}
+						{{ $errors->first('descripcion', '<p class="bg-danger" style="padding: 15px;">:message</p>'); }}
 						{{ Form::textarea('descripcion', null, array('class' => 'form-control')) }}
 					</p>
 					<p>

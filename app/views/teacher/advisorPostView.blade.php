@@ -9,7 +9,7 @@
 				<ol class="breadcrumb">
 					<li><a href="{{ route('teacher') }}">Escritorio</a></li>
 					<li><a href="{{ route('teacher_advisor') }}">Asesor</a></li>
-					<li class="active">Ver Tema  "{{ str_limit($tema->title, $limit = 18, $end = ' ...') }}"</li>
+					<li class="active">{{ str_limit($tema->title, $limit = 18, $end = ' ...') }}</li>
 				</ol>
 				
 				{{ (Input::has('alert_mensaje') ? mensaje_alerta_redirect(Request::get('alert_mensaje'), Request::get('alert_estilo'), Request::get('alert_ico')) : null) }}
@@ -23,6 +23,7 @@
 							Materia <strong>{{ $tema->subject->name }}</strong> 
 							<!-- Periodo <strong>{{ $tema->subject->lapse }}</strong>  -->
 						</p>
+						
 					</div>
 					<div class="panel-body">
 						<div id="tema-{{ $tema->id }}" class="pregunta {{ $tema->id }} {{ $tema->type }}">

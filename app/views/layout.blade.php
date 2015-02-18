@@ -28,7 +28,6 @@
 			<div class="navbar-collapse collapse">
 				@if (  Auth::check() )
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="{{ route('home') }}"><span class="glyphicon glyphicon-dashboard"></span> Escritorio</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 							<span class="glyphicon glyphicon-user"></span> 
@@ -37,8 +36,11 @@
 						</a>
 						<!-- <a href="@{{ route('desktop') }}"><span class="glyphicon glyphicon-dashboard"></span> Escritorio</a> -->
 						<ul class="dropdown-menu" role="menu">
+							<li><a href="{{ route('home') }}"><span class="glyphicon glyphicon-dashboard"></span> Escritorio</a></li>
+							<li class="divider"></li>
 							<li><a href="{{ route('profile') }}"><span class="glyphicon glyphicon-cog"></span> Editar Perfil</a></li>
 							<li><a href="{{-- route('logout') --}}"><span class="glyphicon glyphicon-comment"></span> Soporte Tecnico</a></li>
+							<li class="divider"></li>
 							<li><a href="{{ route('logout') }}"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
 						</ul>
 					</li>
@@ -94,6 +96,7 @@
 						<a href="{{ route('student_partner') }}" {{(Request::is('alumno/asesor') ? 'class="active"' : '')}} {{(Request::is('alumno/asesor/*') ? 'class="active"' : '')}}>
 							Asesor Académico
 						</a>
+					</li>
 					<li>
 						<a href="{{ route('student_comunity') }}" {{(Request::is('alumno/comunidad') ? 'class="active"' : '')}} {{(Request::is('alumno/comunidad/*') ? 'class="active"' : '')}}>
 							Comunidad del Conocimiento
@@ -104,22 +107,22 @@
 					
 					@if (  Auth::user()->type == 'teacher')
 					<li>
-						<a href="{{ route('teacher') }}" {{(Request::is('teacher') ? 'class="active"' : '')}}>
+						<a href="{{ route('teacher') }}" {{(Request::is('maestro') ? 'class="active"' : '')}}>
 							Escritorio
 						</a>
 					</li>
 					<li>
-						<a href="{{ route('teacher_ratings') }}" {{(Request::is('maestro/ratings') ? 'class="active"' : '')}}>
+						<a href="{{ route('teacher_ratings') }}" {{(Request::is('maestro/calificacion') ? 'class="active"' : '')}} {{(Request::is('maestro/calificacion/*') ? 'class="active"' : '')}}>
 							Control Escolar
 						</a>
 					</li>
 					<li>
-						<a href="{{ route('teacher_education') }}" {{(Request::is('maestro/education') ? 'class="active"' : '')}}>
+						<a href="{{ route('teacher_education') }}" {{(Request::is('maestro/educacion') ? 'class="active"' : '')}} {{(Request::is('maestro/educacion/*') ? 'class="active"' : '')}}>
 							Educación Virtual
 						</a>
 					</li>
 					<li>
-						<a href="{{ route('teacher_advisor') }}" {{(Request::is('maestro/advisor') ? 'class="active"' : '')}}>
+						<a href="{{ route('teacher_advisor') }}" {{(Request::is('maestro/asesor') ? 'class="active"' : '')}} {{(Request::is('maestro/asesor/*') ? 'class="active"' : '')}}>
 							Asesor Academico
 						</a>
 					</li>
