@@ -13,6 +13,8 @@
 					<li class="active">Asignar Materia</li>
 				</ol>
 				
+				{{ (Input::has('alert_mensaje') ? mensaje_alerta_redirect(Request::get('alert_mensaje'), Request::get('alert_estilo'), Request::get('alert_ico')) : null) }}
+				
 				<h2>Asignar Materia</h2>
 				
 				Profesor 
@@ -24,7 +26,63 @@
 				<hr>
 				
 				<h3>Lista de materias </h3>
+				{{ Form::open(array('route' => 'administrator_teacher_asignar_save', 'method' => 'POST',)) }}
 				
+				<input type="hidden" name="profile_id" value="{{ $profile->id }}">
+				
+				@foreach ($degrees as $degree)
+				
+				<h3>Carrera: {{ $degree->name }}</h3>
+				
+					@foreach ($degree->subjects as $subject)
+					
+					<p>
+						{{--<input type="checkbox" value="" id="{{ $subject->id }}" class="materiaCheck" datos='{{ json_encode(array( 
+									"subject_id" => $subject->id,
+									"profile_id" => $profile->id,  
+									"degree_id" => $degree->id, 
+									"lapse" => $subject->lapse,
+								 )) }}'> --}}
+						
+						<label>
+						<?php
+						$teacherasignatura = Teacherasignatura::where('profile_id', '=', $profile->id)->where('subject_id', '=', $subject->id)->first();
+						?>
+						
+						@if(! empty($teacherasignatura))
+							@if($teacherasignatura->status === 'true')
+								
+						{{ Form::checkbox('subject_'.$subject->id, $subject->id, true );}}
+							
+							@else
+							
+						{{ Form::checkbox('subject_'.$subject->id, $subject->id);}}
+								
+							@endif
+						 	({{ $teacherasignatura->status }}) - 
+						
+						@else
+						
+						{{ Form::checkbox('subject_'.$subject->id, $subject->id);}}
+						
+						@endif
+						
+						
+						Cuatrimestre: {{ $subject->lapse }} 
+						Materia: {{ $subject->name }}
+						</label>
+						
+					</p>
+				
+					@endforeach
+				
+				@endforeach
+				
+				
+							<button type="subject" class="btn btn-success">Guardar</button>
+							
+						{{ Form::close() }}
+				{{-- 
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -58,7 +116,7 @@
 				
 					</tbody>
 				</table>
-				
+				 --}}
 				<p id="mensajes"></p>
 				
 				
@@ -67,7 +125,7 @@
 <script type="text/javascript">
 @section ('script')
 
-			$(".materiaCheck").click( function(e){
+			/*$(".materiaCheck").click( function(e){
 				id = e.currentTarget.id
 				datos = $("#"+ id).attr('datos');
 				check = $("#"+ id)[0].checked;
@@ -93,7 +151,7 @@
 					},
 			
 				});
-			});
+			});*/
 @stop
 </script>
 

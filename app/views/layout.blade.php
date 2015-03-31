@@ -9,7 +9,9 @@
 	
 	<!-- Estilos -->
 	<link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+	<link href="{{ asset('fonts/education/flaticon.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/sistema.css') }}" rel="stylesheet">
+	@yield('cssAsset')
 </head>
 <body>
 	
@@ -80,13 +82,11 @@
 							Control Escolar
 						</a>
 					</li>
-					<!--
 					<li>
 						<a href="{{ route('student_pay') }}" {{(Request::is('alumno/pagos') ? 'class="active"' : '')}}>
 							Administración
 						</a>
 					</li>
-					-->
 					<li>
 						<a href="{{ route('student_education') }}" {{(Request::is('alumno/educacion') ? 'class="active"' : '')}} {{(Request::is('alumno/educacion/*') ? 'class="active"' : '')}}>
 							Educación Virtual
@@ -139,7 +139,7 @@
 					<li><a href="#" >Historia de pagos</a></li>
 					<li><a href="{{ route('administrator_config') }}" {{(Request::is('teacher') ? 'class="active"' : '')}}>Configuración</a></li>
 					<hr>
-					<li><a href="#" >Inscripción de alumnos</a></li>
+					<li><a href="{{ route('administrator_student_inscription') }}" >Inscripción de alumnos</a></li>
 					<li><a href="#" >Reporte de calificaciones</a></li>
 					<li><a href="#" >Ver un alumno</a></li>
 					<li><a href="#" >Administrador</a></li>
@@ -180,7 +180,11 @@
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
 	<script src="{{ asset('js/bootstrap.js') }}"></script>
 	<!-- <script src="{{ asset('js/tinymce.min.js') }}"></script> -->
-	<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+	<!-- <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.1.7/tinymce.min.js"></script>
+	<script src="{{ asset('js/circleMenu.js') }}"></script>
+	@yield('scriptAsset')
+	
 	
 	<script type="text/javascript">
 		$(document).ready( function(){

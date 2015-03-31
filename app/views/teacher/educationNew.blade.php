@@ -36,9 +36,9 @@
 							
 							<h3>2.- Conección</h3>
 							<p>
-								<a href="https://plus.google.com/hangouts/_?gid=205776620907" style="text-decoration:none;">
+								<a href="https://www.youtube.com/my_live_events?action_create_live_event=1" style="text-decoration:none;">
 									<img src="https://ssl.gstatic.com/s2/oz/images/stars/hangout/1/gplus-hangout-24x100-normal.png" alt="Start a Hangout" style="border:0;width:100px;height:24px;"/>
-								</a>
+								</a>{{-- https://plus.google.com/hangouts/_?gid=205776620907 --}}
 							</p>
 							
 							<h3>3.- Enlace</h3>

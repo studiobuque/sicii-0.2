@@ -32,8 +32,26 @@ class StudentController extends \BaseController {
 	public function rating()
 	{
 		$student = Auth::user()->profile;
+		$subjects = Subject::where('degree_id', '=', $student->degree_id)->where('lapse', '=', $student->lapse)->get();
+		$las_calificaciones = Rating::where('profile_id', '=', $student->id)->where('degree_id', '=', $student->degree_id)->where('lapse', '=', $student->lapse)->get(); // 
+		$calificacion = array();
 		
-		return View::make('student/rating')->with('student', $student);
+		// var_dump($las_calificaciones); // $student->lapse,$student->degree_id, 
+		
+		
+		foreach ($las_calificaciones as $la_calificacion) {
+			$subject_id = $la_calificacion->subject->id;
+			$calificacion_id = $la_calificacion->id;
+			$calificacion_rating = $la_calificacion->rating;
+			
+			$calificacion[$subject_id] = $calificacion_rating;
+			// var_dump($la_calificacion, $la_calificacion->subject->id); echo "<hr>"; // ->id rating
+		}
+		
+		// var_dump($calificacion); echo "<hr>";
+		// exit();
+		
+		return View::make('student/rating')->with(array('student' => $student, 'subjects' => $subjects, 'calificacion' => $calificacion));
 	}
 	
 	public function ratingActual()
@@ -149,8 +167,8 @@ class StudentController extends \BaseController {
 			// Creamos las reglas
 			$rules = array(
 				'tema_id'		=> 'required',
-				'title'			=> 'required',
 				'descripcion'		=> 'required',
+				'title'			=> 'required',
 				'subject_id'		=> 'required',
 			);
 		}
@@ -164,15 +182,15 @@ class StudentController extends \BaseController {
 				
 				// Si se guardo redirecionamos para verlo
 				if ( ! $data['respuesta']) {
-					return Redirect::route('student_comunity_post_view', array('id' => $thema->id, 'alert' => 'Se guardo correctamente', 'alert_estilo' => 'success', 'alert_ico' => 'ok'));
+					return Redirect::route('student_comunity_post_view', array('id' => $thema->id, 'alert_mensaje' => 'Se guardo correctamente tu aporte', 'alert_estilo' => 'success', 'alert_ico' => 'ok'));
 				} else {
-					return Redirect::route('student_comunity_post_view', array('id' => $thema->tema_id));
+					return Redirect::route('student_comunity_post_view', array('id' => $thema->tema_id, 'alert_mensaje' => 'Se guardo correctamente tu respuesta', 'alert_estilo' => 'success', 'alert_ico' => 'ok'));
 				}
 			}	
 		}
 			
 		// Regresamos el mensaje con errores
-		return Redirect::back()->withInput()->withErrors($validation);
+		return Redirect::back()->withInput()->withErrors($validation);// 'alert_estilo' => 'danger', 'alert_ico' => 'remove'))
 	}
 	
 	public function comunityPostEdit($tipo, $id)
@@ -227,13 +245,13 @@ class StudentController extends \BaseController {
 				if ( ! $data['respuesta']) {
 					
 					// Es una pregunta redirecionar a
-					return Redirect::route('student_comunity_post_view', array('id' => $data['id'], 'alert' => 'Se guardo correctamente', 'alert_estilo' => 'success', 'alert_ico' => 'ok'));
+					return Redirect::route('student_comunity_post_view', array('id' => $data['id'], 'alert_mensaje' => 'Se guardo correctamente', 'alert_estilo' => 'success', 'alert_ico' => 'ok'));
 					// 'alert' => json_encode(array('mensage' => 'Se guardo correctamente', 'estilo' => 'success', 'is_ico' => true, 'ico' => 'ok'))
 					
 				} else {
 					
 					// Es una respuesta redirecionar a
-					return Redirect::route('student_comunity_post_view', array('id' => $data['tema_id'], 'alert' => 'Se guardo correctamente', 'alert_estilo' => 'success', 'alert_ico' => 'ok'));
+					return Redirect::route('student_comunity_post_view', array('id' => $data['tema_id'], 'alert_mensaje' => 'Se guardo correctamente', 'alert_estilo' => 'success', 'alert_ico' => 'ok'));
 					
 				}
 			}

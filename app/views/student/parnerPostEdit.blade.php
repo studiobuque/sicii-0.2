@@ -40,6 +40,7 @@
 					<input type="hidden" name="tema_id" value="{{ $tema->tema_id }}">
 					<input type="hidden" name="subject_id" value="{{ $tema->subject_id }}">
 					<input type="hidden" name="respuesta" value="1">
+					<input type="hidden" name="title" value="{{ $tema->title }}">
 					
 					
 				@endif
@@ -48,13 +49,15 @@
 						<!-- <label>Asunto</label>
 						<input type="text" class="form-control"> -->
 						{{ Form::label('title', 'Asunto') }}
-						{{ Form::text('title', null, array('class' => 'form-control', 'disabled' => 'disabled') ) }}
+						{{ Form::text('title', null, array('class' => 'form-control') ) }}
 						{{-- Form::text('title', null, array('class' => 'form-control') ) --}}
+						{{ $errors->first('title', '<p class="bg-danger" style="padding: 15px;">:message</p>'); }}
 					</p>
 					<p>
 						<!-- <textarea class="form-control" rows="5"></textarea> -->
 						{{ Form::label('descripcion', 'Tu aporte') }}
 						{{ Form::textarea('descripcion', null, array('class' => 'form-control')) }}
+						{{ $errors->first('descripcion', '<p class="bg-danger" style="padding: 15px;">:message</p>'); }}
 					</p>
 					{{-- <p>
 						{{ Form::label('subject_id', 'Elige una materia') }}

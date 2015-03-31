@@ -5,8 +5,14 @@ class Rating extends Eloquent {
 
 	public static $rules = array();
 	
-	public function subjectsLapse($degree_id, $profile_id, $lapse)
+	/*public function subjectsLapse($degree_id, $profile_id, $lapse)
 	{
 		return $this->where('name', 'John')->where('name', 'John')->get();
+	}*/
+	
+	public function subject()
+	{
+		return $this->hasOne('Subject', 'id', 'subject_id');
 	}
+	
 }

@@ -26,15 +26,19 @@ Route::group(array('before' => 'guest'), function() {
 // Rutas de los alumnos
 Route::group(array('before' => 'student'), function () {
 	// Route::get('/', 				array('as' => 'desktop', 'uses' => 'StudentController@desktop'));
+	
+	Route::get('alumno/materia', 		array('as' => 'student_subject', 'uses' => 'StudentController@subject'));
+	Route::get('alumno/clase', 		array('as' => 'student_clasroom', 'uses' => 'StudentController@desktop'));
+	Route::get('alumno/foro', 		array('as' => 'student_ask', 'uses' => 'StudentController@desktop'));
+	
 	Route::get('alumno', 			array('as' => 'student', 'uses' => 'StudentController@desktop'));
 	Route::get('alumno/calificaciones', 	array('as' => 'student_rating', 'uses' => 'StudentController@rating'));
 	Route::get('alumno/calificaciones/actual', 	array('as' => 'student_rating_actual', 'uses' => 'StudentController@ratingActual'));
 	Route::get('alumno/calificaciones/todas', 	array('as' => 'student_rating_todo', 'uses' => 'StudentController@ratingTodo'));
-	Route::get('alumno/materia', 		array('as' => 'student_subject', 'uses' => 'StudentController@subject'));
-	Route::get('alumno/pagos', 		array('as' => 'student_pay', 'uses' => 'StudentController@pay'));
-	Route::get('alumno/realizar-pago', 	array('as' => 'student_payment', 'uses' => 'StudentController@desktop'));
-	Route::get('alumno/clase', 		array('as' => 'student_clasroom', 'uses' => 'StudentController@desktop'));
-	Route::get('alumno/foro', 		array('as' => 'student_ask', 'uses' => 'StudentController@desktop'));
+	
+	Route::get('alumno/pago', 		array('as' => 'student_pay', 'uses' => 'StudentController@pay'));
+	Route::get('alumno/pago-enviar', 		array('as' => 'student_pay_send', 'uses' => 'PaypalController@paySend'));
+	Route::get('alumno/pago-estado', 	array('as' => 'student_pay_status', 'uses' => 'PaypalController@payStatus'));
 	
 	Route::get('alumno/educacion', 	array('as' => 'student_education', 'uses' => 'StudentController@education'));
 	Route::get('alumno/educacion/ver/{id}', 	array('as' => 'student_education_view', 'uses' => 'StudentController@educationView'));
@@ -66,6 +70,7 @@ Route::group(array('before' => 'teacher'), function () {
 	
 	Route::get('maestro/calificacion', 	array('as' => 'teacher_ratings', 'uses' => 'TeacherController@ratings'));
 	Route::get('maestro/calificacion-materia/{id}', 	array('as' => 'teacher_ratings_subject', 'uses' => 'TeacherController@ratingsSubject'));
+	Route::post('maestro/calificacion-materia-guardar', 	array('as' => 'teacher_ratings_subject_save', 'uses' => 'TeacherController@ratingsSubjectSave'));
 	
 	Route::get('maestro/asesor', 		array('as' => 'teacher_advisor', 'uses' => 'TeacherController@advisor'));
 	Route::post('maestro/asesor/post-new', array('as' => 'teacher_advisor_post_new', 'uses' => 'TeacherController@advisorPostNew'));
@@ -78,6 +83,8 @@ Route::group(array('before' => 'teacher'), function () {
 	Route::post('maestro/educacion/crear', array('as' => 'teacher_education_create', 'uses' => 'TeacherController@educationCreate'));
 	Route::get('maestro/educacion/editar/{id}', array('as' => 'teacher_education_edit', 'uses' => 'TeacherController@educationEdit'));
 	Route::post('maestro/educacion/guardar', array('as' => 'teacher_education_save', 'uses' => 'TeacherController@educationSave'));
+	Route::get('maestro/educacion/broadcast', 	array('as' => 'teacher_education_broadcast', 'uses' => 'TeacherController@educationBroadcast'));
+	
 });
 
 // Rutas para los administradores
@@ -101,17 +108,22 @@ Route::group(array('before' => 'admin'), function () {
 	// Control de alumnos
 	Route::get('admin/alumnos', 		array('as' => 'administrator_students', 'uses' => 'AdministratorController@listStudent'));
 	Route::get('admin/ver-alumno/{student}/{id}',  array('as' => 'administrator_student', 'uses' => 'AdministratorController@viewStudent'));
-	
-	// Control de Usuarios
-	Route::get('admin/usuario', 		array('as' => 'administrator_user', 'uses' => 'AdministratorController@user'));
-	Route::get('admin/usuario-ver/{id}', 	array('as' => 'administrator_user_view', 'uses' => 'AdministratorController@userView'));
-	Route::post('admin/cuenta', 		array('as' => 'administrator_user_new', 'uses' => 'AdministratorController@userNew'));
-	// Route::get('admin/cuenta-nueva', 	array('as' => 'administrator_user_new', 'uses' => 'AdministratorController@userNew'));
+	Route::get('admin/alumno/inscripcion',  array('as' => 'administrator_student_inscription', 'uses' => 'AdministratorController@viewStudentInscription'));
+	Route::post('admin/alumno/inscripcion',  array('as' => 'administrator_student_inscription_new', 'uses' => 'AdministratorController@viewStudentInscriptionNew'));
+	Route::get('admin/alumno/inscripcion-documentacion/{control}/{id}',  array('as' => 'administrator_student_inscription_documentation', 'uses' => 'AdministratorController@viewStudentInscriptionDocumentation'));
+	Route::post('admin/alumno/inscripcion-documentacion-subir',  array('as' => 'administrator_student_inscription_documentation_new', 'uses' => 'AdministratorController@viewStudentInscriptionDocumentationNew'));
 	
 	// Control de Profesores
 	Route::get('admin/teacher', 		array('as' => 'administrator_teacher', 'uses' => 'AdministratorController@teacher'));
 	Route::get('admin/teacher-asignar/{id}', array('as' => 'administrator_teacher_asignar', 'uses' => 'AdministratorController@teacherAsignar'));
 	Route::post('admin/teacher-asignar-guardar',	array('as' => 'administrator_teacher_asignar_save', 'uses' => 'AdministratorController@teacherAsignarSave'));
+	
+	// Control de Usuarios Administradores
+	Route::get('admin/usuario', 		array('as' => 'administrator_user', 'uses' => 'AdministratorController@user'));
+	Route::get('admin/usuario-ver/{id}', 	array('as' => 'administrator_user_view', 'uses' => 'AdministratorController@userView'));
+	Route::post('admin/cuenta', 		array('as' => 'administrator_user_new', 'uses' => 'AdministratorController@userNew'));
+	// Route::get('admin/cuenta-nueva', 	array('as' => 'administrator_user_new', 'uses' => 'AdministratorController@userNew'));
+	
 });
 	
 Route::group(array('before' => 'auth'), function() {

@@ -33,65 +33,183 @@
 						</div>
 					</div>
 				</div> -->
-				
-				<div class="col-md-4">
-					<div class="panel panel-default text-center">
-						<h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1>
-							Educación Virtual
+<style type="text/css">
+#circle_menu {
+	/*left: 50%;*/
+	left: 185px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 185px;
+}
+#circle_menu li {
+	/*background: rgb(194, 0, 0);*/
+	background: white;
+	border: 1px solid #ddd;
+	overflow: hidden;
+	width: 60px;
+	height: 60px;
+}
+#circle_menu li.menu li:first-child {
+	color: #000;
+	
+}
+#circle_menu li a {
+	/*background: rgb(194, 0, 0);*/
+	color: #000;
+	height: 400px;
+	/*line-height: 150px;*/
+	text-decoration: none;
+	width: 40px;
+}
+#circle_menu li a img {
+	width: 150px;
+	height: auto;
+}
+
+.circle_menu_open {
+	/*border: 1px solid black;*/
+	display: block;
+	height: 510px;
+	margin: 0 auto;
+	overflow: hidden;
+	/*width: 100%;*/
+	width: 510px;
+	position: relative;
+}
+</style>
+
+					<div class="circle_menu_open">
+{{--  
+Hacer menu circular
+https://github.com/zikes/circle-menu
+https://github.com/peachananr/wheel-menu
+--}}
+<ul id="circle_menu">
+	<li>
+  		<a href="#">
+			<strong style="color: #000; line-height: 150px;font-size: 3em;">UCIL</strong>
+		</a>
+	</li>
+	
+	<li>
+  		<a href="{{ route('student_rating') }}">
+			<img src="{{ asset('img/ico/calificacion.jpg') }}">
+			{{-- Asesor Académico --}}
+		</a>
+	</li>
+	<li>
+  		<a href="{{ route('student_pay') }}">
+			<img src="{{ asset('img/ico/pagos.jpg') }}">
+			{{-- Control Escolar --}}
+		</a>
+	</li>
+	<li>
+  		<a href="{{ route('student_education') }}">
+			<img src="{{ asset('img/ico/educacion.jpg') }}">
+			{{-- Comunidad del Conocimiento --}}
+		</a>
+	</li>
+	<li>
+  		<a href="{{ route('student_partner') }}">
+			<img src="{{ asset('img/ico/asesor.jpg') }}">
+			{{-- Educación Virtual --}}
+		</a>
+	</li>
+	<li>
+  		<a href="{{ route('student_comunity') }}">
+			<img src="{{ asset('img/ico/foro.jpg') }}">
+			{{-- Digital Book --}}
+		</a>
+	</li>
+	<li>
+  		<a href="#">
+			<img src="{{ asset('img/ico/soporte.jpg') }}">
+			{{-- Administración --}}
+		</a>
+	</li>
+	{{-- <li>
+  		<a href="#">
+			<img src="{{ asset('img/ico/desktop.png') }}">
+			{{-- Soporte Técnico -- }}
+		</a>
+	</li> --}}
+</ul>
+					</div>
+
+				{{-- 
+				<div class="desktop">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="panel panel-default text-center">
+									<div class="flaticon flaticon-airplane49"></div>
+								<!-- <h1></h1> -->
+								<hr>
+								<img src="{{ asset('img/education/online1.png') }}">
+								Educación Virtual
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="panel panel-default text-center">
+								<!-- <h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1> -->
+								<img src="{{ asset('img/education/forms.png') }}">
+								Asesor Académico
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="panel panel-default text-center">
+								<!-- <h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1> -->
+								<img src="{{ asset('img/education/big52.png') }}">
+								Comunidad del Conocimiento
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="panel panel-default text-center">
+							<!-- <h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1> -->
+							<img src="{{ asset('img/education/icloud.png') }}">
+								Digital Book
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="panel panel-default text-center">
+							<!-- <h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1> -->
+							<img src="{{ asset('img/education/file3.png') }}">
+								Control Escolar
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="panel panel-default text-center">
+							<!-- <h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1> -->
+							<img src="{{ asset('img/education/tablet2.png') }}">
+								Administración
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="panel panel-default text-center">
+							<!-- <h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1> -->
+							<img src="{{ asset('img/education/desktop.png') }}">
+								Soporte Técnico
+						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="panel panel-default text-center">
-						<h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1>
-							Asesor Académico
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="panel panel-default text-center">
-						<h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1>
-							Comunidad del Conocimiento
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="panel panel-default text-center">
-						<h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1>
-							Digital Book
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="panel panel-default text-center">
-						<h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1>
-							Control Escolar
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="panel panel-default text-center">
-						<h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1>
-							Administración
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="panel panel-default text-center">
-						<h1><span class="glyphicon glyphicon-search" aria-hidden="true"></span></h1>
-							Soporte Técnico
-					</div>
-				</div>
+				 --}}
 				
 				<div class="col-md-6">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h2 class="panel-title">Últimos Pagos</h2>
+							<h2 class="panel-title">Control Escolar</h2>
 						</div>
 						<div class="panel-body">
-							<p>Mostrar los pagos</p>
+							<p>Mostrar las calificaciones</p>
 						</div>
 					</div>
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h2 class="panel-title">Últimas Calificaciones</h2>
+							<h2 class="panel-title">Administración</h2>
 						</div>
 						<div class="panel-body">
-							<p>Mostrar las calificaciones</p>
+							<p>Mostrar los pagos</p>
 						</div>
 					</div>
 				</div>
@@ -142,3 +260,18 @@ fsdf<\/p>","type":"partner","profile_id":"3","subject_id":"4","degree_id":"2","l
 					</div>
 				</div>
 @stop
+
+<script>
+
+@section('script') 
+			
+		$('ul#circle_menu').circleMenu({
+			direction: 'full',
+			trigger:'click',
+			item_diameter: 150,
+			circle_radius: 180
+		});
+		$('ul#circle_menu').circleMenu('open');
+@stop
+
+</script>

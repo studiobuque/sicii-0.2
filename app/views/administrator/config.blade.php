@@ -31,7 +31,8 @@
 							<h2 class="panel-title">Configuración de usuarios</h2>
 						</div>
 						<div class="panel-body">
-							<p><a href="{{ route('administrator_user') }}">Crear usuarios</a></p>
+							<p><a href="{{ route('administrator_user') }}">Crear Administradores</a></p>
+							<p><a href="{{ route('administrator_teacher') }}">Crear profesor</a></p>
 						</div>
 					</div>
 					<div class="panel panel-default">
@@ -39,8 +40,7 @@
 							<h2 class="panel-title">Configuración de profesores</h2>
 						</div>
 						<div class="panel-body">
-							<p><a href="{{ route('administrator_teacher') }}">Crear profesor</a></p>
-							<p><a href="{{ route('administrator_teacher_asignar') }}">Asignar materias al profesor</a></p>
+							{{-- <p><a href="{{ route('administrator_teacher_asignar') }}">Asignar materias al profesor</a></p> --}}
 						</div>
 					</div>
 				</div>

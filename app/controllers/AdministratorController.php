@@ -5,7 +5,8 @@ class AdministratorController extends \BaseController {
 	
 	public function desktop()
 	{
-		return View::make('administrator/desktop');
+		$usuario = "administrador";
+		return View::make('administrator/desktop')->with('usuario', $usuario);
 	}
 	
 	// -------------- -------------- -------------- -------------- --------------
@@ -179,6 +180,193 @@ class AdministratorController extends \BaseController {
 		return View::make('administrator/student')->with('student', $student);
 	}
 	
+	// Incripción de alumnos
+	public function viewStudentInscription()
+	{
+		return View::make('administrator/studentInscription');
+	}
+	
+	// Incripción de alumnos
+	public function viewStudentInscriptionNew()
+	{
+		$data = Input::all();
+		
+		/*
+		// 'control', 'first_name', 'father_last_name', 'mother_last_name', 'address', 'phone', 'movile', 'subject_id', 'lapse'
+		foreach ($data as $key => $val) {
+			# code...
+			// var_dump($key);
+			echo '&#39;' . $key . '&#39; => &#39;&#39;, </br> ';
+		}
+		exit();
+		*/
+		
+		// Organizamos los datos del formulario
+		$dataUpload =array(
+			// 'control' => , 'first_name' => , 'father_last_name' => , 'mother_last_name' => , 'address' => , 'phone' => , 'movile' => , 'subject_id' => , 'lapse' => ,
+			'control' 		=> $data['control'], 
+			'email' 			=> $data['email'], 
+			'first_name' 		=> $data['first_name'], 
+			'father_last_name' 	=> $data['father_last_name'], 
+			'mother_last_name' 	=> $data['mother_last_name'], 
+			'address' 		=> $data['address'], 
+			'phone' 		=> $data['phone'], 
+			'movile' 		=> $data['movile'], 
+			'degree_id' 		=> $data['degree_id'], 
+			'lapse' 			=> $data['lapse'], 
+			
+		);
+		
+		
+		// Creamos las reglas
+		$rules = array(
+			'control' 		=> 'required|unique:users,control', 
+			'email' 			=> 'required|email|unique:users,email', 
+			'first_name' 		=> 'required', 
+			'father_last_name' 	=> 'required', 
+			'mother_last_name' 	=> 'required', 
+			'address' 		=> 'required', 
+			'phone' 		=> 'required', 
+			'movile' 		=> 'required', 
+			'degree_id' 		=> 'required|exists:degrees,id', 
+			'lapse' 			=> 'required', 
+		);
+		
+		
+		// Validar el formulario con las reglas
+		$validation = Validator::make($dataUpload, $rules);
+		
+		if ($validation->passes()) {
+			//
+			
+			// dd(array("Mesnajes : " => $validation->messages(),'Paso? : ' => $validation->passes(), 'datos' => $dataUpload ));
+			
+			$user = User::create( array(
+				'control' 		=> $data['control'], 
+				'email' 			=> $data['email'],
+				'password' 		=> $data['password'],
+				'type' 			=> 'student'	// ['admin', 'teacher', 'student']);
+			) );
+			
+			$profile = Profile::create( array(
+				'user_id'		=> $user->id,
+				'first_name' 		=> $data['first_name'],
+				'father_last_name' 	=> $data['father_last_name'],
+				'mother_last_name' 	=> $data['mother_last_name'],
+				'degree_id'		=> $data['degree_id'],
+				'address'		=> $data['address'],
+				'phone'			=> $data['phone'],
+				'movile'			=> $data['movile']
+			) );
+			
+			// administrator_student_inscription_documentation
+			return Redirect::route('administrator_student_inscription_documentation', array('control' => $user->control, 'id' => $user->id, 'alert_mensaje' => 'Se creó correctamente el alumno', 'alert_estilo' => 'success', 'alert_ico' => 'ok'));
+		}
+		
+		// Regresamos el mensaje con errores
+		return Redirect::back()->withInput()->withErrors($validation);
+		// return View::make('administrator/studentInscription');
+	}
+	
+	// Incripción de alumnos - subir la documentación
+	public function viewStudentInscriptionDocumentation($control, $id)
+	{
+		// $users = User::where('type', '=', 'admin')->get();
+		$user = User::find($id);
+		
+		return View::make('administrator/studentInscriptionDocumentation')->with(array('user' => $user));
+	}
+	
+	// Incripción de alumnos - subir la documentación
+	public function viewStudentInscriptionDocumentationNew()
+	{
+		$data = Input::all();
+		$file = Input::file("image");
+		$user = User::find($data['profile_id']);
+		
+		/*
+		foreach ($data as $key => $val) {
+			# code...
+			// var_dump($key);
+			echo '&#39;' . $key . '&#39; => &#39;&#39;, </br> ';
+		}
+		exit();
+		*/
+		
+		/*
+		Laravel 4.1 
+		$file->getFilename();
+		$file->getClientOriginalName();
+		$file->getClientSize();
+		$file->getClientMimeType();
+		$file->guessClientExtension();
+		$file->getRealPath();
+		*/
+		
+		if (Input::hasFile('image')){
+			
+			// Crear un nombre unico y codificamos el id
+			$profile_id = $data['profile_id'];
+			$profile_id_md5 = md5($data['profile_id']);
+			$file_unqid = uniqid();
+			$file_extension = $file->getClientOriginalExtension();
+			
+			$file_name = "$profile_id" . "_$file_unqid.$file_extension";
+			
+			// Organizamos los datos del formulario
+			$dataUpload =array(
+				'profile_id'	=> $data['profile_id'],
+				'filename'	=> $file
+			);
+			
+			// Creamos las reglas
+			$rules = array(
+				'profile_id'	=> 'required|exists:profiles,id',
+				'filename'	=> 'required|mimes:jpeg'
+			);
+			
+			// Validar el formulario con las reglas
+			$validation = Validator::make($dataUpload, $rules);
+			
+			// Si la validacion es correcta
+			if ($validation->passes()) {
+				
+				// Instanciamos una Foto y le pasamos los valores
+				$documentation = new Documentation;
+				$documentation->profile_id = $dataUpload['profile_id'];
+				$documentation->filename = $file_name;
+				
+				// Si se guarda
+				if ( $documentation->save() ) {
+					
+					// Si movemos la imagen a la carpeta de perfiles y le damos el nuevo nombre
+					if ( $file->move("uploads/documentation/", $file_name) ) {
+						
+						return Redirect::route('administrator_student_inscription_documentation', array('control' => $user->control, 'id' => $user->id, 'alert_mensaje' => 'El documento se guardo correctamente', 'alert_estilo' => 'success', 'alert_ico' => 'ok'));
+						
+					}
+					
+				}
+				
+				dd(array('Archivo: ' => $file, 'Datos: ' => $data));
+				
+			}
+				
+			
+			// dd(array('Validation: ' => $validation->messages(), 'file name: ' => $file_name, 'Archivo: ' => $file, 'Datos: ' => $data));
+		
+		} // if (Input::hasFile('image'))
+		
+		// Regresamos el mensaje con errores
+		return Redirect::back()->withInput()->withErrors($validation)->with(array('alert_mensaje' => 'Fallo la carga del documento', 'alert_estilo' => 'danger', 'alert_ico' => 'remove'));
+		
+		
+		$user = User::find($id);
+		
+		return Redirect::route('administrator_student_inscription_documentation', array('control' => $user->control, 'id' => $user->id, 'alert_mensaje' => 'Se creó correctamente el alumno', 'alert_estilo' => 'success', 'alert_ico' => 'ok'));
+	}
+	
+	
 	// -------------- -------------- -------------- -------------- --------------
 	// Usuarios Administradores
 	
@@ -239,30 +427,105 @@ class AdministratorController extends \BaseController {
 	public function teacherAsignarSave()
 	{
 		$data = Input::all();
+		$mensaje = array();
+		// $history = json_decode($data['history'], true);
 		
-		$history = json_decode($data['history'], true);
+		$profile = Profile::find($data['profile_id']);
+		$degrees = Degree::all();
+		// $subjects = Subject::all();
+		// dd(array($data, $user ));
 		
+		/*
+		*/
 		// Organizamos los datos del formulario
 		$dataUpload =array(
-			'profile_id'	=> $history['profile_id'],
-			'degree_id'	=> $history['degree_id'],
+			'profile_id'	=> $data['profile_id'],
+			// 'degree_id'	=> $history['degree_id'],
 			// 'subject_id'	=> $history['subject_id'],
-			'lapse'		=> $history['lapse'],
-			'status'		=> $data['status'],
+			// 'lapse'		=> $history['lapse'],
+			// 'status'		=> $data['status'],
 		);
 		
 		// Creamos las reglas
 		$rules = array(
 			'profile_id'	=> 'required|exists:profiles,id',
-			'degree_id'	=> 'required|exists:degrees,id',
-			'subject_id'	=> 'required|exists:subjects,id',
-			'lapse'		=> 'required',
+			// 'degree_id'	=> 'required|exists:degrees,id',
+			// 'subject_id'	=> 'required|exists:subjects,id',
+			// 'lapse'		=> 'required',
 		);
 		
 		// Comprobamos los datos
 		$validation = Validator::make($dataUpload, $rules);
-		if ($validation) {
+		if ($validation->passes()) {
 			
+			// Pasar las carreras
+			foreach ($degrees as $degree) {
+				// Pasar las materias
+				foreach ($degree->subjects as $subject) {
+					
+					$asignar = Teacherasignatura::where('profile_id', '=', $profile->id)->where('subject_id', '=', $subject->id)->first();
+					$key = 'subject_' . $subject->id;
+					
+					// Si el select esta encendido
+					if (! empty($data[$key])) {
+						
+						// Si la materia esta guardada
+						if(! empty($asignar)){
+							// Guardar true
+							// var_dump(array('key' => $key, 'profile_id' => $profile->id, 'subject_id' => $subject->id, 'lapse' => $subject->lapse,  'degree_id' => $subject->degree->id, 'status' => $asignar->status, 'asign_id' => $asignar->id));
+							
+							$asignar->fill(array(
+								'status' => 'true', 
+							));
+							
+							if ($asignar->save()) {
+								$mensaje[] = array('profile_id' => $profile->id, 'subject_id' => $subject->id, 'lapse' => $subject->lapse,  'degree_id' => $subject->degree->id, 'alert_mensaje' => 'Se guardo correctamente', 'alert_estilo' => 'success', 'alert_ico' => 'ok');
+								// return Redirect::route('administrator_teacher_asignar', array('id' => $data['profile_id'], 'alert_mensaje' => 'Se guardo correctamente', 'alert_estilo' => 'success', 'alert_ico' => 'ok'));
+							} else {
+								// return Redirect::route('administrator_teacher_asignar', array('id' => $data['profile_id'], 'alert_mensaje' => 'Fallo al guardar', 'alert_estilo' => 'danger', 'alert_ico' => 'remove'));
+								$mensaje[] = array('profile_id' => $profile->id, 'subject_id' => $subject->id, 'lapse' => $subject->lapse,  'degree_id' => $subject->degree->id, 'alert_mensaje' => 'Se guardo correctamente', 'alert_estilo' => 'danger', 'alert_ico' => 'remove');
+							}
+							
+						// Si no
+						} else {
+							//Crear
+							// var_dump(array('key' => $key, 'profile_id' => $profile->id, 'subject_id' => $subject->id, 'lapse' => $subject->lapse,  'degree_id' => $subject->degree->id, 'status' => 'true'));
+							
+							$asignar = Teacherasignatura::create(array(
+								'profile_id' => $profile->id,
+								'degree_id' => $subject->degree->id,
+								'subject_id' => $subject->id,
+								'lapse' => $subject->lapse,
+								'status' => 'true',
+							));
+							
+						}
+					// No esta seleccionado
+					} else {
+						// Si la materia esta guardada
+						if(! empty($asignar)){
+							// Guardar false
+							// var_dump(array('key' => $key, 'profile_id' => $profile->id, 'subject_id' => $subject->id, 'lapse' => $subject->lapse,  'degree_id' => $subject->degree->id, 'status' => $asignar->status, 'asign_id' => $asignar->id));
+							
+							$asignar->fill(array(
+								'status' => 'false', 
+							));
+							
+							if ($asignar->save()) {
+								$mensaje[] = array('profile_id' => $profile->id, 'subject_id' => $subject->id, 'lapse' => $subject->lapse,  'degree_id' => $subject->degree->id, 'alert_mensaje' => 'Se guardo correctamente', 'alert_estilo' => 'success', 'alert_ico' => 'ok');
+								// return Redirect::route('administrator_teacher_asignar', array('id' => $data['profile_id'], 'alert_mensaje' => 'Se guardo correctamente', 'alert_estilo' => 'success', 'alert_ico' => 'ok'));
+							} else {
+								// return Redirect::route('administrator_teacher_asignar', array('id' => $data['profile_id'], 'alert_mensaje' => 'Fallo al guardar', 'alert_estilo' => 'danger', 'alert_ico' => 'remove'));
+								$mensaje[] = array('profile_id' => $profile->id, 'subject_id' => $subject->id, 'lapse' => $subject->lapse,  'degree_id' => $subject->degree->id, 'alert_mensaje' => 'Se guardo correctamente', 'alert_estilo' => 'danger', 'alert_ico' => 'remove');
+							}
+							
+						}
+						
+					}
+				}
+			}
+				
+			/*
 			$asignar = Teacherasignatura::firstOrCreate(array('profile_id' => $history['profile_id'], 'degree_id' => $history['degree_id'], 'subject_id' => $history['subject_id'], 'lapse' => $history['lapse']));
 			$asignar->fill($dataUpload);
 			
@@ -271,11 +534,14 @@ class AdministratorController extends \BaseController {
 			}
 			
 			return json_encode($asignar);
+			*/
 		}
 		
-		return json_encode(array($dataUpload, $validation->messages()));
+		// var_dump($mensaje);
+		// return json_encode(array($dataUpload, $validation->messages()));
+		// return View::make('administrator/teacherAsignar')->with(array('profile' => $profile, 'degrees' => $degrees));
+		return Redirect::route('administrator_teacher_asignar', array('id' => $data['profile_id'], 'alert_mensaje' => 'Se guardaron las materias', 'alert_estilo' => 'warning', 'alert_ico' => 'exclamation-sign'));
 		
-		return View::make('administrator/teacherAsignar')->with(array('profile' => $profile, 'degrees' => $degrees));
 	}
 	
 	// -------------- -------------- -------------- -------------- --------------

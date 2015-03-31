@@ -37,7 +37,7 @@ function mensaje_alerta($alert){
 			$alert_ico = '';
 		}
 		
-		$html ='<div class="alert alert-' . $alert_estilo . '" role="alert">' . $alert_ico . $alert['mensaje'] . '</div>';
+		$html ='<div class="alert alert-' . $alert_estilo . '" role="alert"  data-dismiss="alert">' . $alert_ico . $alert['mensaje'] . '</div>';
 		
 	}
 	

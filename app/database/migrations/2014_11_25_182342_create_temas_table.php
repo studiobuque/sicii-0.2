@@ -18,7 +18,7 @@ class CreateTemasTable extends Migration {
 			$table->integer('tema_id');
 			$table->string('title');
 			$table->longText('descripcion');
-			$table->enum('type', ['comunity', 'partner']);
+			$table->enum('type', array('comunity', 'partner'));
 			
 			// Usuario vinculado
 			$table->integer('profile_id')->unsigned()->foreign('profile_id')->references('id')->on('profiles');

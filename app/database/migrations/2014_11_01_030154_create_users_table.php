@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration {
 			$table->integer('control');
 			$table->string('email');
 			$table->string('password');
-			$table->enum('type', ['admin', 'teacher', 'student']);
+			$table->enum('type', array('admin', 'teacher', 'student'));
 			$table->string('subtype');
 			$table->string('remember_token')->nullable();
 			

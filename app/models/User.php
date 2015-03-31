@@ -19,6 +19,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password');
 	
+	protected $fillable = array('control', 'email', 'password', 'type');
 	
 	public function profile()
 	{
@@ -85,5 +86,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->email;
 	}
+	
+	public function setPasswordAttribute($value)
+	{
+		$this->attributes['password'] = Hash::make($value);
+	}
+	
 
 }

@@ -19,9 +19,13 @@
 						
 						<p class="meta"><!--  style="font-size: 0.8em;" -->
 							
-							Por <strong>{{ $tema->profile->first_name }} {{ $tema->profile->father_last_name }}</strong>.
+							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+							{{ $student->first_name }} {{ $student->father_last_name }} {{ $student->mother_last_name }} &nbsp;
+							<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+							{{ mi_fecha($tema->created_at, true) }} &nbsp;
 							<!-- Carrera <strong>{{ $tema->degree->name }}</strong> -->
-							Materia <strong>{{ $tema->subject->name }}</strong> 
+							<span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+							<strong>{{ $tema->subject->name }}</strong> 
 							<!-- Periodo <strong>{{ $tema->subject->lapse }}</strong>  -->
 						</p>
 					</div>
@@ -52,9 +56,9 @@
 							
 							<p class="meta" style="font-size: 0.8em; margin-top: 0.5em;">
 								<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-								<strong>{{ $respuestas->profile->first_name }} {{ $respuestas->profile->father_last_name }}</strong>.
+								{{ $respuestas->profile->first_name }} {{ $respuestas->profile->father_last_name }}&nbsp;
 								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-								<strong>{{ mi_fecha($respuestas->created_at, true) }} </strong>.
+								{{ mi_fecha($respuestas->created_at, true) }}&nbsp;
 								
 								@if ($respuestas->profile_id == $student->id )
 								<a href="{{ route('student_partner_post_edit', array('respuesta', $respuestas->id)) }}" class="btn btn-success btn-xs">Editar</a>
@@ -77,7 +81,7 @@
 						<h3 class="panel-title">Deja tu respuesta</h3>
 					</div>
 					<div class="panel-body">
-						{{ Form::open(array('route' => 'student_partner_post_new', 'method' => 'POST', 'class' => 'form-horizontal')) }}
+						{{ Form::open(array('route' => 'student_partner_post_new', 'method' => 'POST')) }}
 							
 							<input type="hidden" name="title" value="RE: {{ $tema->title }}">
 							<input type="hidden" name="tema_id" value="{{ $tema->id }}">
@@ -92,10 +96,8 @@
 							</div> --}}
 							<div class="form-group">
 								{{ Form::label('descripcion', ' ') }}
-								<div class="col-sm-12">
 								{{ Form::textarea('descripcion', null, array('class' => 'form-control')) }}
 								{{ $errors->first('descripcion', '<p class="bg-danger" style="padding: 0.5em; margin-top: 0.5em;">:message</p>'); }}
-								</div>
 							</div>
 								
 							<!-- <a href="#"class="btn btn-success">Responder</a> -->

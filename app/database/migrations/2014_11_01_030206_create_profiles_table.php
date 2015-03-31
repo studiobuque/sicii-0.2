@@ -14,6 +14,7 @@ class CreateProfilesTable extends Migration {
 	{
 		Schema::create('profiles', function(Blueprint $table) {
 			$table->increments('id');
+			
 			// Usuario vinculado
 			$table->integer('user_id')->unsigned()->foreign('user_id')->references('id')->on('users');
 			// Carrera vinculada

@@ -2,31 +2,35 @@
 
 @import url(http://fonts.googleapis.com/css?family=Lato:400,700);
 
+/*
+ * Base structure
+ */
+
 body
 {
 	/*font-family: 'Arvo', Georgia, serif;*/
 	font-family: 'Lato', sans-serif;
 	font-size: 16px;
+	padding-top: 50px; /* Move down content because we have a fixed navbar that is 50px tall */
 }
 
-
+.desktop img {
+	width: 40%;
+	display: block;
+	text-align: center;
+	margin: 1em auto;
+}
 /*
- * Base structure
+ * Main content
  */
 
-/* Move down content because we have a fixed navbar that is 50px tall */
-body {
-	padding-top: 50px;
+.main {
+	padding: 20px;
+	/*background: #FEFFEE;*/
 }
 
-
-/*
- * Global add-ons
- */
-
-.sub-header {
-	padding-bottom: 10px;
-	border-bottom: 1px solid #eee;
+.main .page-header {
+	margin-top: 0;
 }
 
 /*
@@ -38,6 +42,34 @@ body {
 }
 
 /*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+	margin-bottom: 30px;
+	text-align: center;
+}
+.placeholders h4 {
+	margin-bottom: 0;
+}
+.placeholder {
+	margin-bottom: 20px;
+}
+.placeholder img {
+	display: inline-block;
+	border-radius: 50%;
+}
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+/*
  * Sidebar
  */
 
@@ -45,6 +77,7 @@ body {
 .sidebar {
 	/*display: none;*/
 }
+
 @media (min-width: 768px) {
 	.sidebar {
 		position: fixed;
@@ -68,6 +101,11 @@ body {
 		color: #CACAE3;
 	}
 	
+	.main {
+		padding-right: 40px;
+		padding-left: 40px;
+		margin-bottom: 4em;
+	}
 	.main .page-header {
 		background-color: #FEFFEE;
 		padding: 0.2em 0.5em;
@@ -120,42 +158,4 @@ body {
 		word-wrap: normal;
 	}
 
-}
-/*
- * Main content
- */
-
-.main {
-	padding: 20px;
-	/*background: #FEFFEE;*/
-}
-@media (min-width: 768px) {
-	.main {
-		padding-right: 40px;
-		padding-left: 40px;
-		margin-bottom: 4em;
-	}
-}
-.main .page-header {
-	margin-top: 0;
-}
-
-
-/*
- * Placeholder dashboard ideas
- */
-
-.placeholders {
-	margin-bottom: 30px;
-	text-align: center;
-}
-.placeholders h4 {
-	margin-bottom: 0;
-}
-.placeholder {
-	margin-bottom: 20px;
-}
-.placeholder img {
-	display: inline-block;
-	border-radius: 50%;
 }

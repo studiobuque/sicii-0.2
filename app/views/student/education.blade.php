@@ -8,7 +8,7 @@
 				
 				<!-- <p class="lead">Aquí puede interactuar para el mejor aprovechaminto de las clases</p> -->
 				
-				<h2>{{ $student->first_name }}</h2>
+				<h2>Ver las últimas clases</h2>
 				
 				<table class="table table-striped">
 					<thead>
@@ -16,21 +16,27 @@
 							<th>Título</th>
 							<th>Fecha</th>
 							<th>Materia</th>
-							<th>Carrera</th>
+							<!--<th>Carrera</th>-->
 						</tr>
 					</thead>
 					<tbody>
 						@foreach ($educations as $education)
 						<tr>
-							<td><a href="{{ route('student_education_view', array($education->id)) }}">{{ $education->title }}</a></td>
-							<td>{{ $education->created_at }}</td>
+							<td>
+								<a href="{{ route('student_education_view', array($education->id)) }}">
+									{{-- $education->title --}}
+									{{ str_limit($education->title, $limit = 18, $end = ' ...') }}
+								</a>
+							</td>
+							<td>{{ mi_fecha($education->created_at, true) }}</td>
 							<td>{{ $education->subject->name }}</td>
-							<td>{{ $education->subject->degree->name }}</td>
-							<td>..</td>
+							<!--<td>{{ $education->subject->degree->name }}</td>-->
 						</tr>
 						@endforeach
 					</tbody>
 				</table>
+				
+				{{ $educations->links() }}
 				
 				{{-- $educations --}}
 				<!-- 

@@ -18,7 +18,14 @@
 						{{ $education->descripcion }}
 						<!-- {"id":"1","tema_id":"0","title":"Clase Virtual 1","descripcion":"Editamos una clase virtual","url":"https:\/\/plus.google.com\/hangouts\/_\/g2mklhcnkgmshmctlsi7rmhf5qa","status":"","slug":"","profile_id":"0","subject_id":"2","degree_id":"1","lapse":"1","created_at":"2015-01-14 18:13:42","updated_at":"2015-01-14 18:37:05"} -->
 						
-						<p><a href="{{ $education->url }}" class="btn btn-success" target="_blank">Entrar a la clase</a></p>
+						{{-- <p><a href="" class="btn btn-success" target="_blank">Entrar a la clase</a></p> --}}
+						
+						<!--
+						{{ $education->url }} 
+						{{ $url_embeded = substr($education->url, strpos($education->url, 'youtu.be/') + 9, strlen($education->url)) }}
+						 -->
+						
+						<iframe width="640" height="360" src="https://www.youtube.com/embed/{{ $url_embeded }}"  frameborder="0" allowfullscreen></iframe>
 					</div>
 				</div>
 				

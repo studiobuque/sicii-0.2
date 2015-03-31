@@ -9,7 +9,7 @@
 				<ol class="breadcrumb">
 					<li><a href="{{ route('student') }}">Estudiante</a></li>
 					<li><a href="{{ route('student_comunity') }}">Comunidad</a></li>
-					<li class="active">Editar tema "{{ $tema->title }}"</li>
+					<li class="active">Editar tema: "{{ str_limit($tema->title, $limit = 18, $end = ' ...') }}"</li>
 				</ol>
 				
 				<!-- <h2>Editar tema</h2> -->

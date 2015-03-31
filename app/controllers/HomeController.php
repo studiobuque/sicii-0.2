@@ -121,7 +121,7 @@ class HomeController extends BaseController {
 			
 		}
 		
-		return Redirect::back()->withInput()->withErrors($validation)->with(array('alert' => array('mensaje' => 'Se guardo correctamente', 'estilo' => 'success', 'is_ico' => true, 'ico' => 'ok')));
+		return Redirect::back()->withInput()->withErrors($validation->messages())->with(array('alert' => array('mensaje' => 'Se guardo correctamente', 'estilo' => 'success', 'is_ico' => true, 'ico' => 'ok')));
 			
 	}
 

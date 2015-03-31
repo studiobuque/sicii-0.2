@@ -2,7 +2,7 @@
 
 
 class Profile extends \Eloquent {
-	protected $fillable = array('user_id', 'first_name', 'father_last_name', 'mother_last_name', 'address', 'phone', 'movile');
+	protected $fillable = array('user_id', 'degree_id', 'first_name', 'father_last_name', 'mother_last_name', 'address', 'phone', 'movile');
 	protected $guarded = array();
 	
 
@@ -24,4 +24,10 @@ class Profile extends \Eloquent {
 	{
 		return $this->hasOne('Rating');
 	}
+	
+	public function documents()
+	{
+		return $this->hasMany('Documentation');
+	}
+	
 }
